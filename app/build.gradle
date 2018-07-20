@@ -1,0 +1,131 @@
+apply plugin: 'com.android.application'
+android {
+    signingConfigs {
+        config {
+            keyAlias 'eeepay'
+            keyPassword 'eeepay'
+            storeFile file('androidkeystore1.jks')
+            storePassword 'eeepay'
+        }
+    }
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    defaultConfig {
+        applicationId "baseproject.demo.zzq.cn.eeepay.com.baseproject"
+        minSdkVersion  rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode 100
+        versionName "1.0.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath true
+                arguments = [ moduleName : project.getName() ]
+            }
+        }
+        multiDexEnabled = true
+        //X5Webview需要如下配置，因为他只支持32位的
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+        }
+    }
+    buildTypes {
+        release {
+            // 不显示Log
+            buildConfigField "boolean", "DEBUG_MODEL", "false"
+            minifyEnabled true
+            shrinkResources true //移除无用的资源
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
+            // 显示Log
+            buildConfigField "boolean", "DEBUG_MODEL", "true"
+            minifyEnabled false
+            shrinkResources false //移除无用的资源
+            zipAlignEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+    }
+    flavorDimensions "color"
+    productFlavors {
+        superchange {
+            minSdkVersion rootProject.ext.android.minSdkVersion
+            applicationId 'cn.eeepay.superchange'
+            manifestPlaceholders = [app_name: "超级兑"]//每新增一个OEM 这里需要定义一下
+            signingConfig signingConfigs.config
+            versionCode 103
+            versionName "1.0.1"
+            dimension "color"
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            //生成自定义 App 名称
+            if (variant.buildType.name.equals("release")) {
+                def appName = "" + variant.productFlavors.name + "_v" + variant.productFlavors.versionName + "_" + new Date().format("yyyyMMdd_HHmm") + ".apk"
+                def appName2 = appName.replace("[", "");
+                def appName3 = appName2.replace("]", "");
+                //add by zhuangzeqin 2017年11月16日 17:42:11 自定义生成目录--根据不同的渠道项目名称去生成目录
+                def version = "v" + variant.productFlavors.versionName;//版本号
+                def channel_name = variant.productFlavors.manifestPlaceholders.getAt("app_name").toString();
+                //渠道的项目名称
+                def dirName = channel_name + "/" + version + "/" + appName3//目录生成
+                def dirNameTimp = dirName.replace("[", "")
+                def dirNameLast = dirNameTimp.replace("]", "")
+                outputFileName = dirNameLast
+            }
+
+        }
+    }
+}
+repositories {
+    flatDir {
+        dirs 'libs' // aar目录
+    }
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    //noinspection GradleCompatible
+    implementation rootProject.ext.dependencies["appcompat-v7"]
+    implementation rootProject.ext.dependencies["support-v4"]
+    implementation rootProject.ext.dependencies["design"]
+    implementation rootProject.ext.dependencies["recyclerview"]
+    implementation rootProject.ext.dependencies["cardview"]
+    testImplementation rootProject.ext.dependencies["junit"]
+    androidTestImplementation rootProject.ext.dependencies["runner"]
+    androidTestImplementation rootProject.ext.dependencies["espresso-core"]
+    //强大的logger 日志输出工具类
+    implementation rootProject.ext.dependencies["logger"]
+    //easypermissions是谷歌给出的一个运行时权限申请库
+    implementation rootProject.ext.dependencies["easypermissions"]
+    /* gson解析*/
+    implementation rootProject.ext.dependencies["gson"]
+    /** 一个Adapter同时适用于RecyclerView、ListView、GridView、Spinner等**/
+    implementation rootProject.ext.dependencies["superadapter"]
+    /** 一个Adapter适用于分组的情况下**/
+    implementation rootProject.ext.dependencies["GroupedRecyclerViewAdapter"]
+    /** 一个下拉刷新加载更多的一个第三方库适用于分组的情况下**/
+    implementation rootProject.ext.dependencies["SmartRefreshLayout"]
+    /** picasso 图片加载库 **/
+    implementation rootProject.ext.dependencies["picasso"]
+    /** multidex dex  **/
+    implementation rootProject.ext.dependencies["multidex"]
+    /** 强大的 textview 控件 **/
+    implementation rootProject.ext.dependencies["SuperTextView"]
+    /** 强大的 时间选择器、省市区三级联动 控件 能够满足日常需要的场景**/
+    implementation rootProject.ext.dependencies["Android-PickerView"]
+    /** 不同组件间的通信库 **/
+    implementation rootProject.ext.dependencies["otto"]
+    /** 一个用于帮助 Android App 进行组件化改造的框架 —— 支持模块间的路由、通信、解耦**/
+    api rootProject.ext.dependencies["arouter-api"]
+    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+}

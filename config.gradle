@@ -1,0 +1,53 @@
+ext {
+    android = [
+            compileSdkVersion: 27,
+            buildToolsVersion: "27.1.1",
+            minSdkVersion    : 18,
+            targetSdkVersion : 27,
+            versionCode      : 1,
+            versionName      : "1.0"
+    ]
+    dependVersion = [
+            support: "27.1.1"
+    ]
+    dependencies = [
+            //androidtest
+            "junit"                      : "junit:junit:4.12",
+            "runner"                     : "com.android.support.test:runner:1.0.2",
+            "espresso-core"              : "com.android.support.test.espresso:espresso-core:3.0.2",
+            //android-support
+            "support-v4"                 : "com.android.support:support-v4:${dependVersion.support}",
+            "appcompat-v7"               : "com.android.support:appcompat-v7:${dependVersion.support}",
+            "design"                     : "com.android.support:design:${dependVersion.support}",
+            "recyclerview"               : "com.android.support:recyclerview-v7:${dependVersion.support}",
+            "cardview"                   : "com.android.support:cardview-v7:${dependVersion.support}",
+
+            //otto 通讯机制
+            "otto"                       : "com.squareup:otto:1.3.8",
+            //强大的logger 日志输出工具类
+            "logger"                      : "com.orhanobut:logger:2.2.0",
+            //easypermissions是谷歌给出的一个运行时权限申请库
+            "easypermissions"             : "pub.devrel:easypermissions:1.2.0",
+            /* gson解析*/
+            "gson"                        : "com.google.code.gson:gson:2.8.4",
+            /** 一个Adapter同时适用于RecyclerView、ListView、GridView、Spinner等**/
+            "superadapter"                : "org.byteam.superadapter:superadapter:3.6.8",
+            /** 一个Adapter适用于分组的情况下**/
+            "GroupedRecyclerViewAdapter"  : "com.github.donkingliang:GroupedRecyclerViewAdapter:1.2.2",
+            /** 一个下拉刷新加载更多的一个第三方库适用于分页的情况下**/
+            "SmartRefreshLayout"          : "com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1",
+            /** picasso 图片加载库 **/
+            "picasso"                     : "com.squareup.picasso:picasso:2.71828",
+            /** multidex dex  **/
+            "multidex"                     : "com.android.support:multidex:1.0.3",
+            /** 强大的 textview 控件 能够满足日常需要的场景**/
+            "SuperTextView"                 : "com.github.lygttpod:SuperTextView:2.1.7",
+            /** 强大的 时间选择器、省市区三级联动 控件 能够满足日常需要的场景**/
+            "Android-PickerView"            : "com.contrarywind:Android-PickerView:4.1.5",
+            //  阿里的路由框框 arouter 替换成最新版本, 需要注意的是api
+            // 要与compiler匹配使用，均使用最新版可以保证兼容
+            "arouter-api"                   : "com.alibaba:arouter-api:1.3.1",
+            "arouter-compiler"              : "com.alibaba:arouter-compiler:1.1.4",
+
+    ]
+}
