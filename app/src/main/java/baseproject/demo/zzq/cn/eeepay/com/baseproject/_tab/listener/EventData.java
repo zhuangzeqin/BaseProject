@@ -1,7 +1,7 @@
 package baseproject.demo.zzq.cn.eeepay.com.baseproject._tab.listener;
 
 /**
- * 描述：class describe
+ * 描述：声明一个事件实体
  * 作者：zhuangzeqin
  * 时间: 2018/5/14-16:42
  * 邮箱：zzq@eeepay.cn

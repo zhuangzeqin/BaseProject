@@ -3,13 +3,13 @@ package baseproject.demo.zzq.cn.eeepay.com.baseproject.ui;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.R;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject._tab.AbstractCommonTabLayout;
-import baseproject.demo.zzq.cn.eeepay.com.baseproject.constant.StrDefConstant;
-import baseproject.demo.zzq.cn.eeepay.com.baseproject.ui.fragment.SimpleFragment;
 
 /**
  * 描述：基础的项目架构
@@ -64,11 +64,20 @@ public class MainActivity extends AbstractCommonTabLayout {
      **/
     @Override
     protected ArrayList<Fragment> getFragmentList() {
-        mFragments.add(SimpleFragment.getInstance(StrDefConstant.KEY_BAODAN));//添加首页
+        // 获取Fragment
+        Fragment fragment1 = (Fragment) ARouter.getInstance().build("/fragmet/SimpleFragment").navigation();
+        Fragment fragment2 = (Fragment) ARouter.getInstance().build("/fragmet/SimpleFragment").navigation();
+        Fragment fragment3 = (Fragment) ARouter.getInstance().build("/fragmet/SimpleFragment").navigation();
+        Fragment fragment4 = (Fragment) ARouter.getInstance().build("/fragmet/SimpleFragment").navigation();
+        mFragments.add(fragment1);
+        mFragments.add(fragment2);
+        mFragments.add(fragment3);
+        mFragments.add(fragment4);
+/*        mFragments.add(SimpleFragment.getInstance(StrDefConstant.KEY_BAODAN));//添加首页
         //后续可以添加其他的Fragment 这里我用同一个Fragment
         mFragments.add(SimpleFragment.getInstance(StrDefConstant.KEY_FENSI));//添加会员
         mFragments.add(SimpleFragment.getInstance(StrDefConstant.KEY_DAILI));//添加海报
-        mFragments.add(SimpleFragment.getInstance(StrDefConstant.KEY_PTYH));//添加我的
+        mFragments.add(SimpleFragment.getInstance(StrDefConstant.KEY_PTYH));//添加我的*/
         return mFragments;
     }
 

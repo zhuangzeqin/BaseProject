@@ -1,6 +1,7 @@
 package baseproject.demo.zzq.cn.eeepay.com.baseproject.ui.base;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,8 +14,9 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.alibaba.android.arouter.launcher.ARouter;
 
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.R;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.ui.interfaces.BaseViewInfterface;
@@ -38,9 +40,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     private TextView mTv_title;
     /***获取右边的标题**/
     protected TextView tv_rightTitle;
-
-    protected ImageView iv_back;
-    protected Context mContext;//上下文对象
+    /***获取返回的图标**/
+    protected TextView iv_back;
+    /**
+     * 上下文对象
+     **/
+    protected Context mContext;
 
     /**
      * 获取右边的标题
@@ -172,6 +177,56 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         super.onResume();
     }
 
+    /**
+     * 在支持路由的页面上添加注解(必选)
+     * 这里的路径需要注意的是至少需要有两级，/xx/xx
+     *
+     * @param path
+     * @Route(path = "/test/activity")
+     */
+    protected void goActivity(@NonNull final String path) {
+        //应用内简单的跳转带转场动画(常规方式)
+        ARouter.getInstance().build(path).withTransition(R.anim.eposp_push_left_in, R.anim.eposp_push_left_out).navigation();
+    }
+
+    /**
+     * 路由跳转Activity 并携带Bundle
+     *
+     * @param path
+     * @param bundle
+     */
+    protected void goActivity(@NonNull final String path, Bundle bundle) {
+        if (bundle == null)
+            goActivity(path);
+        else
+            ARouter.getInstance().build(path).withTransition(R.anim.eposp_push_left_in, R.anim.eposp_push_left_out).with(bundle).navigation();
+    }
+
+    /**
+     * 类似 Intent 的
+     * startActivityForResult 跳转
+     *
+     * @param path
+     * @param bundle
+     * @param requestCode
+     */
+
+    protected void goActivityForResult(@NonNull final String path, Bundle bundle, int requestCode) {
+        if (bundle == null)
+            ARouter.getInstance().build(path).withTransition(R.anim.eposp_push_left_in, R.anim.eposp_push_left_out).navigation(null, requestCode);
+        else
+            ARouter.getInstance().build(path).with(bundle).withTransition(R.anim.eposp_push_left_in, R.anim.eposp_push_left_out).navigation(null, requestCode);
+    }
+
+    /**
+     * 清理中间activity，跳转到某activity，这方法较常用
+     *
+     * @param path
+     */
+    protected void goTopActivity(@NonNull final String path) {
+        ARouter.getInstance().build(path).withFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).withTransition(R.anim.eposp_push_left_in, R.anim.eposp_push_left_out).navigation();
+    }
+
     public <T extends View> T getViewById(int id) {
         View view = findViewById(id);
         return (T) view;
@@ -190,6 +245,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     /**
      * 统一的状态栏和虚拟按键颜色设置
+     *
      * @return
      */
     protected abstract int getBarColorId();

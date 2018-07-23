@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+
 import java.util.List;
 
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.R;
@@ -19,6 +21,7 @@ import baseproject.demo.zzq.cn.eeepay.com.baseproject.ui.base.BaseFitsSystemWind
  * 邮箱：zzq@eeepay.cn
  * 备注:
  */
+@Route(path = "/activity/ErrorActivity")
 public class ErrorActivity extends BaseFitsSystemWindowsActivity {
     TextView cashError;
     Button btnOk;

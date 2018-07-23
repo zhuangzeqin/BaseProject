@@ -3,7 +3,7 @@ package baseproject.demo.zzq.cn.eeepay.com.baseproject._tab.listener;
 import com.squareup.otto.Bus;
 
 /**
- * 描述：class describe
+ * 描述：ott 组件间的通讯
  * 作者：zhuangzeqin
  * 时间: 2018/5/14-16:38
  * 邮箱：zzq@eeepay.cn

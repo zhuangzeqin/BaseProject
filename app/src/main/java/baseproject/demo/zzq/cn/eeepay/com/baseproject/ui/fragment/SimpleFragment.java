@@ -2,12 +2,15 @@ package baseproject.demo.zzq.cn.eeepay.com.baseproject.ui.fragment;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.Gravity;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.orhanobut.logger.Logger;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -37,6 +40,7 @@ import pub.devrel.easypermissions.EasyPermissions;
  * 邮箱：zzq@eeepay.cn
  * 备注:
  */
+@Route(path = "/fragmet/SimpleFragment")
 public class SimpleFragment extends BaseFragment {
     private CommonLinerRecyclerView commonLinerRecyclerView;
     private SingleAdapter mSingleAdapter;
@@ -99,8 +103,12 @@ public class SimpleFragment extends BaseFragment {
                         initpermission();
                         break;
                     case 2:
-                        String str = null;
-                        str.split(",");
+                        ARouter.getInstance().build("/activity/ErrorActivity").
+                                withTransition(R.anim.eposp_push_left_in, R.anim.eposp_push_left_out).
+                                withFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                                        Intent.FLAG_ACTIVITY_NEW_TASK).
+                                withString("message", "test 一下，这里有一个异常页面；显示异常信息 ").
+                                navigation();
                         break;
                 }
             }
