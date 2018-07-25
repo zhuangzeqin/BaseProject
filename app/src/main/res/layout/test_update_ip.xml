@@ -1,0 +1,147 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+        <include layout="@layout/layout_toolbar"/>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="这只是一个测试界面，仅供测试使用，其他人员请忽略"
+            android:textColor="@color/anhei" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#000000" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="测试环境"
+            android:textColor="@color/anhei" />
+
+        <TextView
+            android:id="@+id/url_180"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="http://183.239.131.218:58107/"
+            android:textColor="@color/anhei" />
+        <!--http://183.239.131.218:58107/  http://192.168.1.182:8107/-->
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#000000" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="准生产环境"
+            android:textColor="@color/anhei" />
+
+        <TextView
+            android:id="@+id/url_zsc"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="http://test-redeem.pay-world.cn/"
+            android:textColor="@color/anhei" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#000000" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#000000" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="生产环境"
+            android:textColor="@color/anhei" />
+
+        <TextView
+            android:id="@+id/url_shengchan"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="http://redeem.pay-world.cn/"
+            android:textColor="@color/anhei" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#000000" />
+
+        <RadioGroup
+            android:id="@+id/radiogroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rb_138"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="测试环境"
+                android:textColor="@color/anhei" />
+
+            <RadioButton
+                android:id="@+id/rb_zsc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="准生产环境"
+                android:textColor="@color/anhei" />
+
+            <RadioButton
+                android:id="@+id/rb_shengchan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="生产环境（线上环境）"
+                android:textColor="@color/anhei" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/msg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/anhei" />
+
+        <EditText
+            android:id="@+id/et_custom_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/label_bar_height"
+            android:background="@drawable/input_bg"
+            android:hint="自定义地址" />
+
+        <Button
+            android:id="@+id/btn_custom_confirm"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/blue_corners_selected"
+            android:onClick="customAddressConfirm"
+            android:text="确定"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_15" />
+
+    </LinearLayout>
+
+</ScrollView>

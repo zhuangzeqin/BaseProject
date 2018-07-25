@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    //定义圆角
+    <corners
+        android:bottomLeftRadius="5sp"
+        android:bottomRightRadius="5sp"
+        android:topLeftRadius="5sp"
+        android:topRightRadius="5sp" />
+
+    <!--<solid android:color="@color/white"/>-->
+
+    <stroke
+        android:width="0.2dp"
+        android:color="@color/gray_text_color_3" />
+
+    <padding
+        android:bottom="10dp"
+        android:right="10dp"
+        android:top="10dp" />
+</shape>

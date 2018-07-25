@@ -11,7 +11,7 @@ android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
         applicationId "baseproject.demo.zzq.cn.eeepay.com.baseproject"
-        minSdkVersion  rootProject.ext.android.minSdkVersion
+        minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 100
         versionName "1.0.0"
@@ -19,7 +19,7 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 includeCompileClasspath true
-                arguments = [ moduleName : project.getName() ]
+                arguments = [moduleName: project.getName()]
             }
         }
         multiDexEnabled = true
@@ -128,4 +128,5 @@ dependencies {
     /** 一个用于帮助 Android App 进行组件化改造的框架 —— 支持模块间的路由、通信、解耦**/
     api rootProject.ext.dependencies["arouter-api"]
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+
 }

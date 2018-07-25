@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="baseproject.demo.zzq.cn.eeepay.com.baseproject">
-    <!--- 未知来源安装包 -->
+
+    <!-- - 未知来源安装包 -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <!-- 网络状态权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -21,13 +22,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/TranslucentTheme">
+
         <!--
             从Android 7.0开始，不再允许在app中把file:// Uri暴露给其他app，否则应用会抛出FileUriExposedException
             exported 是否设置为独立进程
             android:grantUriPermissions="true" 是否拥有共享文件的临时权限
             android:authorities 域名
             android:resource 共享文件的文件根目录，名字可以自定义
-       -->
+        -->
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.FileProvider"
@@ -49,6 +51,7 @@
             android:name=".ui.act.ErrorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
+        <activity android:name=".ui.act.ConstraintLayoutActivity"></activity>
     </application>
 
 </manifest>

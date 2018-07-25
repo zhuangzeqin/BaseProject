@@ -11,6 +11,8 @@ import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.orhanobut.logger.Logger;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -25,7 +27,9 @@ import java.util.List;
 import java.util.Map;
 
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.R;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.adapter.NullToEmptyAdapterFactory;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.adapter.SingleAdapter;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.bean.Persons;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.constant.StrDefConstant;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.ui.base.BaseFragment;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ToastUtils;
@@ -60,6 +64,9 @@ public class SimpleFragment extends BaseFragment {
         items.add("logger日志打印");
         items.add("权限申请");
         items.add("奔溃异常日志记录");
+        items.add("gson解析null值的问题");
+        items.add("ARouter路由框架");
+        items.add("ConstraintLayout布局使用");
 
     }
 
@@ -109,6 +116,21 @@ public class SimpleFragment extends BaseFragment {
                                         Intent.FLAG_ACTIVITY_NEW_TASK).
                                 withString("message", "test 一下，这里有一个异常页面；显示异常信息 ").
                                 navigation();
+                        break;
+                    case 3:
+                        String json = "{\"careingpeople_id\":\"33\",\"lovecode\":null,\"appellation\":\"父亲\",\"name\":\"王健林\",\"birthday\":\"2015-04-08\",\"mobile\":\"15689653698\",\"areano\":\"320583\",\"communityno\":\"1\",\"communityname\":\"测试小区\",\"agency_id\":\"1\",\"street\":\"\",\"sex\":null,\"canselfcare\":\"0\",\"language\":\"本地话\",\"disease\":\"糖尿病\",\"memo\":\"哈哈\",\"price\":null,\"ctime\":null}";
+                        Gson gson = new GsonBuilder().
+                                registerTypeAdapterFactory(new NullToEmptyAdapterFactory())
+                                .create();
+                        //然后用上面一行写的gson来序列化和反序列化实体类type
+                        Persons persons = gson.fromJson(json, Persons.class);
+                        Logger.json(json);
+                        Logger.d(persons.toString());
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        ARouter.getInstance().build("/test/ConstraintLayoutActivity").navigation();
                         break;
                 }
             }

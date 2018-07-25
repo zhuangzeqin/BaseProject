@@ -29,6 +29,7 @@ public abstract class BaseFitsSystemWindowsActivity extends BaseActivity {
     * @param view
     */
    public void setHeight(View view) {
+       if (view==null) return;
        // 获取actionbar的高度
        TypedArray actionbarSizeTypedArray = obtainStyledAttributes(new int[]{
                android.R.attr.actionBarSize

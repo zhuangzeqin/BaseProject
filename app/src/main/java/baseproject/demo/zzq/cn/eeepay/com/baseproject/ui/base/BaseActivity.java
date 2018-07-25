@@ -21,6 +21,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.R;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.ui.interfaces.BaseViewInfterface;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ActivityManager;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ToastUtils;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.VirturlUtil;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -104,7 +105,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
      * 沉浸式状态栏背景设置
      **/
     private void initBgBar(@ColorRes int id) {
-        mToolbar.setBackgroundColor(getResources().getColor(id));//颜色设置
+        if (mToolbar!=null)
+            mToolbar.setBackgroundColor(getResources().getColor(id));//颜色设置
 //        mToolbar.setBackgroundResource(R.mipmap.icon_shopping_goods_bg);//图片
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//api >= 21
 //            getWindow().setNavigationBarColor(Color.parseColor("#1bb5d7"));
@@ -133,6 +135,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     protected void initToolBar(String title) {
         mToolbar = findViewById(R.id.toolbar);
         if (mToolbar != null) {
+            ToastUtils.showLong("mToolbar 不为空");
             setSupportActionBar(mToolbar);
             ActionBar actionBar = getSupportActionBar();
             actionBar.setTitle("");
@@ -150,6 +153,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                     }
                 });
             }
+        }
+        else
+        {
+            ToastUtils.showLong("mToolbar 控件为空");
         }
     }
 
