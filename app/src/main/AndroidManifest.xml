@@ -51,7 +51,12 @@
             android:name=".ui.act.ErrorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.act.ConstraintLayoutActivity"></activity>
+        <activity android:name=".ui.act.ConstraintLayoutActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.act.RxBusAct"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -60,6 +60,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         super.onCreate(savedInstanceState);
         mContext = this;
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//不可横屏幕
         /** 设置布局 **/
         setContentView(getLayoutId());
         //解决华为虚拟键冲突遮挡底部按钮

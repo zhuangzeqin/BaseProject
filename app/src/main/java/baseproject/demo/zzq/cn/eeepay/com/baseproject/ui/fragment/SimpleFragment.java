@@ -65,7 +65,7 @@ public class SimpleFragment extends BaseFragment {
         items.add("权限申请");
         items.add("奔溃异常日志记录");
         items.add("gson解析null值的问题");
-        items.add("ARouter路由框架");
+        items.add("RxBus的使用");
         items.add("ConstraintLayout布局使用");
 
     }
@@ -128,6 +128,14 @@ public class SimpleFragment extends BaseFragment {
                         Logger.d(persons.toString());
                         break;
                     case 4:
+//                        SparseArray<String> stringSparseArray = new SparseArray<>();
+//                        SparseBooleanArray
+//                        SparseIntArray
+//                        SparseLongArray
+//                        LongSparseArray
+//                        ArrayMap
+
+                        ARouter.getInstance().build("/Rx/RxBusAct").navigation();
                         break;
                     case 5:
                         ARouter.getInstance().build("/test/ConstraintLayoutActivity").navigation();
