@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.View;
 
@@ -67,6 +68,8 @@ public class SimpleFragment extends BaseFragment {
         items.add("gson解析null值的问题");
         items.add("RxBus的使用");
         items.add("ConstraintLayout布局使用");
+        items.add("Android注解使用");
+        items.add("MVP使用");
 
     }
 
@@ -128,17 +131,22 @@ public class SimpleFragment extends BaseFragment {
                         Logger.d(persons.toString());
                         break;
                     case 4:
-//                        SparseArray<String> stringSparseArray = new SparseArray<>();
+                        SparseArray<String> stringSparseArray = new SparseArray<>();
 //                        SparseBooleanArray
 //                        SparseIntArray
 //                        SparseLongArray
 //                        LongSparseArray
-//                        ArrayMap
-
+//                        ArrayMap arrayMap = new ArrayMap<>()
                         ARouter.getInstance().build("/Rx/RxBusAct").navigation();
                         break;
                     case 5:
                         ARouter.getInstance().build("/test/ConstraintLayoutActivity").navigation();
+                        break;
+                    case 6:
+                        ARouter.getInstance().build("/annoteted/AnnotatedAct").navigation();
+                        break;
+                    case 7:
+                        ARouter.getInstance().build("/mvp/TestMVPAct2").navigation();
                         break;
                 }
             }

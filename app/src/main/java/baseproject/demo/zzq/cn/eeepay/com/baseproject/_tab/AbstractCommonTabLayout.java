@@ -48,6 +48,7 @@ public abstract class AbstractCommonTabLayout extends BaseFitsSystemWindowsActiv
      * 初始化数据
      */
     protected void initData() {
+        super.initData();
     }
 
 
@@ -75,6 +76,7 @@ public abstract class AbstractCommonTabLayout extends BaseFitsSystemWindowsActiv
             mTabEntities.add(new TabEntity(arrayTitles[i], arrayIconSelectIds[i], arrayIconUnSelectIds[i]));
         }
         mTabLayout.setTabData(mTabEntities);//填充数据
+        mViewPager.setOffscreenPageLimit(0);
         mViewPager.setAdapter(new CommonPagerAdapter(getSupportFragmentManager()));
         //设置监听事件
         mTabLayout.setOnTabSelectListener(mOnTabSelectListener);

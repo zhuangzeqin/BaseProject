@@ -51,12 +51,19 @@
             android:name=".ui.act.ErrorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.act.ConstraintLayoutActivity"
+        <activity
+            android:name=".ui.act.ConstraintLayoutActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.act.RxBusAct"
+        <activity
+            android:name=".ui.act.RxBusAct"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
+        <activity android:name=".ui.act.AnnotatedAct" />
+        <!--<activity android:name=".ui.base.BaseMvpActivity" />-->
+        <activity android:name=".ui.act.TestMVPAct"></activity>
+        <activity android:name=".ui.act.TestMVPAct2"></activity>
+        <activity android:name=".ui.act.TestMVPAct3"></activity>
     </application>
 
 </manifest>

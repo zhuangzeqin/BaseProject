@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.CallSuper;
 import android.support.annotation.ColorRes;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -17,11 +19,11 @@ import android.view.Window;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.orhanobut.logger.Logger;
 
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.R;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.ui.interfaces.BaseViewInfterface;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ActivityManager;
-import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ToastUtils;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.VirturlUtil;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -98,6 +100,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     /**
      * 初始化数据
      */
+    @CallSuper
     protected void initData() {
 
     }
@@ -136,7 +139,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     protected void initToolBar(String title) {
         mToolbar = findViewById(R.id.toolbar);
         if (mToolbar != null) {
-            ToastUtils.showLong("mToolbar 不为空");
             setSupportActionBar(mToolbar);
             ActionBar actionBar = getSupportActionBar();
             actionBar.setTitle("");
@@ -157,7 +159,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         }
         else
         {
-            ToastUtils.showLong("mToolbar 控件为空");
+            Logger.d("mToolbar 控件为空");
         }
     }
 
@@ -235,7 +237,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         ARouter.getInstance().build(path).withFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).withTransition(R.anim.eposp_push_left_in, R.anim.eposp_push_left_out).navigation();
     }
 
-    public <T extends View> T getViewById(int id) {
+    public <T extends View> T getViewById(@IdRes int id) {
         View view = findViewById(id);
         return (T) view;
     }

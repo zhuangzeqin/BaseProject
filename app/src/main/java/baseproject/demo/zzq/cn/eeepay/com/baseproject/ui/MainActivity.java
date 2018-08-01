@@ -66,7 +66,7 @@ public class MainActivity extends AbstractCommonTabLayout {
     protected ArrayList<Fragment> getFragmentList() {
         // 获取Fragment
         Fragment fragment1 = (Fragment) ARouter.getInstance().build("/fragmet/SimpleFragment").navigation();
-        Fragment fragment2 = (Fragment) ARouter.getInstance().build("/fragmet/SimpleFragment").navigation();
+        Fragment fragment2 = (Fragment) ARouter.getInstance().build("/mvp/TestMVPFragment").navigation();
         Fragment fragment3 = (Fragment) ARouter.getInstance().build("/fragmet/SimpleFragment").navigation();
         Fragment fragment4 = (Fragment) ARouter.getInstance().build("/fragmet/SimpleFragment").navigation();
         mFragments.add(fragment1);
@@ -79,6 +79,11 @@ public class MainActivity extends AbstractCommonTabLayout {
         mFragments.add(SimpleFragment.getInstance(StrDefConstant.KEY_DAILI));//添加海报
         mFragments.add(SimpleFragment.getInstance(StrDefConstant.KEY_PTYH));//添加我的*/
         return mFragments;
+    }
+
+    @Override
+    protected void initData() {
+        super.initData();
     }
 
     /**
