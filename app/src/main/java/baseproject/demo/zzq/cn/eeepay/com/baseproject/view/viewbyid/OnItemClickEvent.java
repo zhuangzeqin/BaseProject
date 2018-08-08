@@ -9,7 +9,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 描述：点击事件的注解
+ * 描述：item点击事件的注解
  * 作者：zhuangzeqin
  * 时间: 2018/8/3-17:08
  * 邮箱：zzq@eeepay.cn
@@ -17,6 +17,8 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.METHOD)//方法上
 @Retention(RetentionPolicy.RUNTIME)//运行时
-public @interface OnClickEvent {
-    @IdRes int[] value() default {View.NO_ID};//数组； 因为可能有多个按钮的点击事件
+//@Repeatable()参数指明接收的注解class,可以实现重复注解
+//@Inherited //添加可继承元注解
+public @interface OnItemClickEvent {
+    @IdRes int[] value() default {View.NO_ID};//数组； 因为可能有多个长按按钮的点击事件
 }

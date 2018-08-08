@@ -44,14 +44,19 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends Fragment 
     protected boolean isVisible;
     protected Context mContext;
     protected Activity mActivity;
-    /** 解析用到的注解以及完成绑定和解绑 View 等一些公共的 Presenter 操作 **/
+    /**
+     * 解析用到的注解以及完成绑定和解绑 View 等一些公共的 Presenter 操作
+     **/
     private PresenterProviders mPresenterProviders;
-    /** presenter 的调度器 **/
+    /**
+     * presenter 的调度器
+     **/
     private PresenterDispatch mPresenterDispatch;
     /**
      * 等待加载的对话框
      */
     private ProgressDialog _waitDialog;
+
     @Override
     public void onAttach(Context context) {
         mActivity = (Activity) context;
@@ -91,11 +96,11 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends Fragment 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mPresenterDispatch.detachView();
     }
 
     @Override
     public void onDetach() {
+        mPresenterDispatch.detachView();
         this.mActivity = null;
         super.onDetach();
     }
@@ -105,7 +110,10 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends Fragment 
         super.onSaveInstanceState(outState);
         mPresenterDispatch.onSaveInstanceState(outState);
     }
-    /** 当只有一个presenter 的时候可以直接通过这个方法获取 **/
+
+    /**
+     * 当只有一个presenter 的时候可以直接通过这个方法获取
+     **/
     protected P getPresenter() {
         return mPresenterProviders.getPresenter(0);
     }
@@ -159,6 +167,7 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends Fragment 
     protected void onVisible() {
         lazyLoad();//懒加载
     }
+
     /**
      * 不可见的情况下
      */
@@ -186,7 +195,7 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends Fragment 
 
     @UiThread
     public ProgressDialog showWaitDialog(String message) {
-        if (!mActivity.isFinishing() && isVisible) {
+        if (mActivity != null && !mActivity.isFinishing() && isVisible) {
             if (_waitDialog == null) {
                 _waitDialog = DialogHelper.getProgressDialog(mActivity, message);
                 _waitDialog.setCanceledOnTouchOutside(false);
@@ -203,7 +212,7 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends Fragment 
     @UiThread
     @Override
     public void hideLoading() {
-        if (!mActivity.isFinishing() && _waitDialog != null) {
+        if (mActivity != null && !mActivity.isFinishing() && _waitDialog != null && isVisible && _waitDialog.isShowing()) {
             try {
                 _waitDialog.dismiss();
                 _waitDialog = null;
@@ -216,10 +225,12 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends Fragment 
     @UiThread
     @Override
     public void showError(String error) {
-        ToastUtils.setBgColor(Color.parseColor("#ff7e00"));
-        ToastUtils.setMsgColor(Color.parseColor("#ffffff"));
-        ToastUtils.setGravity(Gravity.CENTER, 0, 0);
-        ToastUtils.showShort(error);
+        if (isVisible) {
+            ToastUtils.setBgColor(Color.parseColor("#ff7e00"));
+            ToastUtils.setMsgColor(Color.parseColor("#ffffff"));
+            ToastUtils.setGravity(Gravity.CENTER, 0, 0);
+            ToastUtils.showShort(error);
+        }
     }
 
     /**

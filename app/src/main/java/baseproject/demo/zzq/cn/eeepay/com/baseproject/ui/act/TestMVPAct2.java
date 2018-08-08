@@ -6,7 +6,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.UiThread;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 
@@ -97,6 +99,20 @@ public class TestMVPAct2 extends BaseMvpActivity implements LoginView, RegisterV
     public void onClickEvent(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
+                ListView mListView = null;
+                mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    }
+                });
+
+                mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        return false;
+                    }
+                });
                 mLoginPresenter.login();//调用登录请求
                 break;
             case R.id.btn_register:

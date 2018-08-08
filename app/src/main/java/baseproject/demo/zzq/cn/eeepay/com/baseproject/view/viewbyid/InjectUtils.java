@@ -2,6 +2,8 @@ package baseproject.demo.zzq.cn.eeepay.com.baseproject.view.viewbyid;
 
 import android.app.Activity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -104,6 +106,52 @@ public class InjectUtils {
         }
     }
 
+    /**
+     * item 的 点击事件
+     * @param activity
+     */
+    private void bindOnItemClickEvent(final Activity activity)
+    {
+        Class<? extends Activity> aClass = activity.getClass();
+//        aClass.getAnnotationsByType(OnItemClickEvent.class);
+//        aClass.getDeclaredAnnotationsByType()方法获取到的注解不包括父类，
+        boolean annotationPresent = aClass.isAnnotationPresent(OnItemClickEvent.class);
+        if (annotationPresent)
+        {
+            //获取所有的方法
+            Method[] declaredMethods = aClass.getDeclaredMethods();
+            //遍历所有的方法
+            for (final Method method : declaredMethods) {
+                //获取方法上的OnClick注解
+                OnItemClickEvent onClick = method.getAnnotation(OnItemClickEvent.class);
+                if (onClick == null)
+                    continue;
+                int[] resId = onClick.value();
+                for (int i = 0; i < resId.length; i++) {
+                    final ListView view = (ListView)activity.findViewById(resId[i]);
+                    view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            try {
+                                //暴力反射
+                                method.setAccessible(true);
+                                method.invoke(activity, adapterView,view,i,l);
+                            } catch (IllegalAccessException e) {
+                                e.printStackTrace();
+                            } catch (InvocationTargetException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
+            }
+        }
+    }
+    /**
+     * 注解点击事件
+     *
+     * @param activity
+     */
     private void bindOnClickEvent(final Activity activity) {
         Class<? extends Activity> aClass = activity.getClass();
         //获取所有的方法
