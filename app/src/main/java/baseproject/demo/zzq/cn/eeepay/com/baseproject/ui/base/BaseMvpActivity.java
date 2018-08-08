@@ -36,6 +36,7 @@ import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ActivityManager;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ToastUtils;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.VirturlUtil;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.view.dialog.DialogHelper;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.view.viewbyid.InjectUtils;
 import pub.devrel.easypermissions.EasyPermissions;
 
 /**
@@ -80,6 +81,7 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends AppCompat
         /** ------不可横屏幕-------- **/
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(getContentView());
+        InjectUtils.getInstance().inject(this);
         //解决华为虚拟键冲突遮挡底部按钮
         VirturlUtil.assistActivity(findViewById(android.R.id.content));
         /** ------注释说明-------- **/

@@ -52,8 +52,8 @@ android {
     productFlavors {
         superchange {
             minSdkVersion rootProject.ext.android.minSdkVersion
-            applicationId 'cn.eeepay.superchange'
-            manifestPlaceholders = [app_name: "超级兑"]//每新增一个OEM 这里需要定义一下
+            applicationId 'cn.eeepay.zzq.base.demo'
+            manifestPlaceholders = [app_name: "BaseProject"]//每新增一个OEM 这里需要定义一下
             signingConfig signingConfigs.config
             versionCode 103
             versionName "1.0.1"

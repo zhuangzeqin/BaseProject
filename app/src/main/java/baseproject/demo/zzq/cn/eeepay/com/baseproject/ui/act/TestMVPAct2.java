@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.UiThread;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 
@@ -20,6 +21,9 @@ import baseproject.demo.zzq.cn.eeepay.com.baseproject.presenter.register.Registe
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.presenter.register.RegisterView;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.ui.base.BaseMvpActivity;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ToastUtils;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.view.viewbyid.OnClickEvent;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.view.viewbyid.OnLongClickEvent;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.view.viewbyid.ViewById;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -32,11 +36,20 @@ import pub.devrel.easypermissions.EasyPermissions;
  */
 @Route(path = "/mvp/TestMVPAct2")
 @CreatePresenter(presenter = {LoginPresenter.class, RegisterPresenter.class})
-public class TestMVPAct2 extends BaseMvpActivity implements LoginView, RegisterView,EasyPermissions.PermissionCallbacks {
+public class TestMVPAct2 extends BaseMvpActivity implements LoginView, RegisterView, EasyPermissions.PermissionCallbacks {
     @PresenterVariable//采用注解无需new
     private LoginPresenter mLoginPresenter;
     @PresenterVariable
     private RegisterPresenter mRegisterPresenter;
+
+    @ViewById(R.id.btn_login)
+    private Button btn_login;
+
+    @ViewById(R.id.btn_register)
+    private Button btn_register;
+
+    @ViewById(R.id.btn_tes)
+    private Button btn_test;
 
     @Override
     protected int getContentView() {
@@ -50,6 +63,7 @@ public class TestMVPAct2 extends BaseMvpActivity implements LoginView, RegisterV
 
     @Override
     protected void initView() {
+
         initBgBar(R.color.eposp_red_2);
     }
 
@@ -60,25 +74,48 @@ public class TestMVPAct2 extends BaseMvpActivity implements LoginView, RegisterV
 
     @Override
     protected void eventOnClick() {
-        getViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mLoginPresenter.login();//调用登录请求
-            }
-        });
+//        getViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mLoginPresenter.login();//调用登录请求
+//            }
+//        });
+//
+//        getViewById(R.id.btn_register).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mRegisterPresenter.register();//调用注册请求
+//            }
+//        });
+    }
 
-        getViewById(R.id.btn_register).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+   /* @OnClickEvent(R.id.btn_login)
+    public void onClickEvent(View view) {
+        mLoginPresenter.login();//调用登录请求
+    }*/
+    @OnClickEvent({R.id.btn_login, R.id.btn_register})
+    public void onClickEvent(View view) {
+        switch (view.getId()) {
+            case R.id.btn_login:
+                mLoginPresenter.login();//调用登录请求
+                break;
+            case R.id.btn_register:
                 mRegisterPresenter.register();//调用注册请求
-            }
-        });
+                break;
+        }
+    }
+
+    @OnLongClickEvent(R.id.btn_tes)
+    public void onLongClickEvent(View view)
+    {
+        ToastUtils.showShort("测试一一下长按事件");
     }
 
     @Override
     protected void initData() {
         initpermission();
     }
+
     private void initpermission() {
         //存储SD卡权限
         String perms[] = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
