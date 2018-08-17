@@ -15,7 +15,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -26,13 +25,14 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.orhanobut.logger.Logger;
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.R;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.presenter.annotated.BasePresenter;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.presenter.annotated.PresenterDispatch;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.presenter.annotated.PresenterProviders;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.ui.view.IBaseView;
-import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ActivityManager;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ActivityStackManager;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ToastUtils;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.VirturlUtil;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.view.dialog.DialogHelper;
@@ -47,7 +47,7 @@ import pub.devrel.easypermissions.EasyPermissions;
  * 邮箱：zzq@eeepay.cn
  * 备注:
  */
-public abstract class BaseMvpActivity<P extends BasePresenter> extends AppCompatActivity implements IBaseView {
+public abstract class BaseMvpActivity<P extends BasePresenter> extends RxAppCompatActivity implements IBaseView {
     /***获取TAG的activity名称**/
     protected final String TAG = this.getClass().getSimpleName();
     /***获取Toolbar**/
@@ -75,12 +75,13 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends AppCompat
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         /** 设置添加到ActivityManager 管理类**/
-        ActivityManager.getInstance().addActivity(this);
+        ActivityStackManager.getInstance().push(this);
         mContext = this;
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         /** ------不可横屏幕-------- **/
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(getContentView());
+        /** ------注释说明--自定义注解；如果不需要可以注释掉------ **/
         InjectUtils.getInstance().inject(this);
         //解决华为虚拟键冲突遮挡底部按钮
         VirturlUtil.assistActivity(findViewById(android.R.id.content));
@@ -111,7 +112,8 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends AppCompat
         super.onDestroy();
         //解绑View的操作
         mPresenterDispatch.detachView();
-        ActivityManager.getInstance().finish(this);
+        mPresenterDispatch.onDestroyPresenter();
+        ActivityStackManager.getInstance().remove(this);
     }
 
     /**

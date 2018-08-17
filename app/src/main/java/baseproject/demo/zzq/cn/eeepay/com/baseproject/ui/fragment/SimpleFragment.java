@@ -70,6 +70,7 @@ public class SimpleFragment extends BaseFragment {
         items.add("ConstraintLayout布局使用");
         items.add("Android注解使用");
         items.add("MVP使用");
+        items.add("RxJava基础使用");
 
     }
 
@@ -147,6 +148,9 @@ public class SimpleFragment extends BaseFragment {
                         break;
                     case 7:
                         ARouter.getInstance().build("/mvp/TestMVPAct2").navigation();
+                        break;
+                    case 8:
+                        ARouter.getInstance().build("/RxJava/RxJavaActivity").navigation();
                         break;
                 }
             }

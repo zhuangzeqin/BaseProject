@@ -23,7 +23,7 @@ import com.orhanobut.logger.Logger;
 
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.R;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.ui.interfaces.BaseViewInfterface;
-import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ActivityManager;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ActivityStackManager;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.VirturlUtil;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -80,7 +80,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         /** 初始化数据**/
         initData();
         /** 设置添加到ActivityManager 管理类**/
-        ActivityManager.getInstance().addActivity(this);
+        ActivityStackManager.getInstance().push(this);
     }
 
     /**
@@ -109,7 +109,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
      * 沉浸式状态栏背景设置
      **/
     private void initBgBar(@ColorRes int id) {
-        if (mToolbar!=null)
+        if (mToolbar != null)
             mToolbar.setBackgroundColor(getResources().getColor(id));//颜色设置
 //        mToolbar.setBackgroundResource(R.mipmap.icon_shopping_goods_bg);//图片
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//api >= 21
@@ -156,9 +156,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                     }
                 });
             }
-        }
-        else
-        {
+        } else {
             Logger.d("mToolbar 控件为空");
         }
     }
@@ -245,7 +243,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ActivityManager.getInstance().finish(this);
+        ActivityStackManager.getInstance().remove(this);
     }
 
     /**

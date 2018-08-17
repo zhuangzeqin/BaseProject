@@ -55,7 +55,7 @@ public class TestMVPAct extends BaseMvpActivity<LoginPresenter> implements Login
 
     @UiThread
     @Override
-    public void loginSuccess() {
-        ToastUtils.showLong("登录成功....");
+    public void loginSuccess(String msg) {
+        ToastUtils.showLong(msg);
     }
 }

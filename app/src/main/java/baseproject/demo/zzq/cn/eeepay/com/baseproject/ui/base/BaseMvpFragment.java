@@ -12,13 +12,13 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
-import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.trello.rxlifecycle2.components.support.RxFragment;
 
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.R;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.presenter.annotated.BasePresenter;
@@ -35,7 +35,7 @@ import baseproject.demo.zzq.cn.eeepay.com.baseproject.view.dialog.DialogHelper;
  * 邮箱：zzq@eeepay.cn
  * 备注:
  */
-public abstract class BaseMvpFragment<P extends BasePresenter> extends Fragment implements IBaseView {
+public abstract class BaseMvpFragment<P extends BasePresenter> extends RxFragment implements IBaseView {
     protected View mRootView;
     protected LayoutInflater inflater;
     // 标志位 标志已经初始化完成。

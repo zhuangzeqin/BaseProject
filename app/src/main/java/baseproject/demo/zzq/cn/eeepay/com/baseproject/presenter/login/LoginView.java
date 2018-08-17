@@ -10,5 +10,5 @@ import baseproject.demo.zzq.cn.eeepay.com.baseproject.ui.view.IBaseView;
  * 备注:
  */
 public interface LoginView extends IBaseView{
-    void loginSuccess();//登录成功
+    void loginSuccess(String msg);//登录成功
 }

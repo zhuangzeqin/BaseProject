@@ -23,6 +23,8 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.BuildConfig;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.excation.CrashHandlerManager;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.api.ApiUtils;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.retrofit.RetrofitManager;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.Utils;
 
 /**
@@ -50,6 +52,8 @@ public class App extends Application {
         /**  初始化Logger **/
         initLogger();
         Utils.init(mInstance);
+        //***************可以根据不同切换的地址；进行设置*******************
+        RetrofitManager.getInstance().initCustomConfig(ApiUtils.SERVICE_ADDRESS);
     }
 
     /**
@@ -95,7 +99,7 @@ public class App extends Application {
         FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
                 .showThreadInfo(true)  // (Optional) Whether to show thread info or not. Default true
                 .methodCount(0)         // (Optional) How many method line to show. Default 2
-                .methodOffset(200)        // (Optional) Skips some method invokes in stack trace. Default 5
+                .methodOffset(500)        // (Optional) Skips some method invokes in stack trace. Default 5
 //        .logStrategy(customLog) // (Optional) Changes the log strategy to print out. Default LogCat
                 .tag("MyTag")   // (Optional) Custom tag for each log. Default PRETTY_LOGGER
                 .build();

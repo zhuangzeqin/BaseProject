@@ -32,8 +32,8 @@ public class TestMVPFragment extends BaseMvpFragment implements LoginView, Regis
 
     @UiThread
     @Override
-    public void loginSuccess() {
-        ToastUtils.showLong("登录成功....");
+    public void loginSuccess(String msg) {
+        ToastUtils.showLong(msg);
     }
 
     @UiThread

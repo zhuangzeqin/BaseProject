@@ -61,10 +61,11 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
         <activity android:name=".ui.act.AnnotatedAct" />
-        <!--<activity android:name=".ui.base.BaseMvpActivity" />-->
-        <activity android:name=".ui.act.TestMVPAct"></activity>
-        <activity android:name=".ui.act.TestMVPAct2"></activity>
-        <activity android:name=".ui.act.TestMVPAct3"></activity>
+        <!-- <activity android:name=".ui.base.BaseMvpActivity" /> -->
+        <activity android:name=".ui.act.TestMVPAct" />
+        <activity android:name=".ui.act.TestMVPAct2" />
+        <activity android:name=".ui.act.TestMVPAct3" />
+        <activity android:name=".ui.act.RxJavaActivity"></activity>
     </application>
 
 </manifest>
