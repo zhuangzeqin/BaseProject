@@ -35,7 +35,7 @@ import baseproject.demo.zzq.cn.eeepay.com.baseproject.R;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.presenter.annotated.BasePresenter;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.presenter.annotated.PresenterDispatch;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.presenter.annotated.PresenterProviders;
-import baseproject.demo.zzq.cn.eeepay.com.baseproject.ui.view.IBaseView;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.presenter.interfaces.IBaseView;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ActivityStackManager;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ToastUtils;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.VirturlUtil;

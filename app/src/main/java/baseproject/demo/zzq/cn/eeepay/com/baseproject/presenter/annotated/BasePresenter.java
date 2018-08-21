@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-import baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.api.ApiUtils;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.util.ApiUtils;
 
 /**
  * 描述：通用的presenter来为我们添加view的绑定与销毁。

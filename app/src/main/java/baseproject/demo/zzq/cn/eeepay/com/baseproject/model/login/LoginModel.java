@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import java.util.Map;
 
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.bean.LoginInfo;
-import baseproject.demo.zzq.cn.eeepay.com.baseproject.model.ModelContract;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.model.interfaces.ModelContract;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.api.Result;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.retrofit.RetrofitManager;
 import io.reactivex.Observable;

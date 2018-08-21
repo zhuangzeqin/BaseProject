@@ -1,4 +1,4 @@
-package baseproject.demo.zzq.cn.eeepay.com.baseproject.model;
+package baseproject.demo.zzq.cn.eeepay.com.baseproject.model.interfaces;
 
 import android.support.annotation.NonNull;
 

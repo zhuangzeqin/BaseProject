@@ -23,7 +23,7 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.BuildConfig;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.excation.CrashHandlerManager;
-import baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.api.ApiUtils;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.util.ApiUtils;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.retrofit.RetrofitManager;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.Utils;
 

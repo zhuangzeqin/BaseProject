@@ -8,7 +8,7 @@ import java.util.Map;
 
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.bean.LoginInfo;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.model.base.BaseModel;
-import baseproject.demo.zzq.cn.eeepay.com.baseproject.model.ModelContract;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.model.interfaces.ModelContract;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.api.BaseObserver;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.api.Result;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.rxhelper.HttpErrorFunction;

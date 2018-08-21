@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.bean.LoginInfo;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.model.login.LoginModel2;
-import baseproject.demo.zzq.cn.eeepay.com.baseproject.model.ModelContract;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.model.interfaces.ModelContract;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.presenter.annotated.BasePresenter;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.api.Result;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.util.Utils;

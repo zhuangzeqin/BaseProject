@@ -1,6 +1,6 @@
 package baseproject.demo.zzq.cn.eeepay.com.baseproject.presenter.login;
 
-import baseproject.demo.zzq.cn.eeepay.com.baseproject.ui.view.IBaseView;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.presenter.interfaces.IBaseView;
 
 /**
  * 描述：登录需要相关的View的操作

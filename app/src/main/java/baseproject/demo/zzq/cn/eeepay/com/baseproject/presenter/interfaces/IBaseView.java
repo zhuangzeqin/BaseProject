@@ -1,4 +1,4 @@
-package baseproject.demo.zzq.cn.eeepay.com.baseproject.ui.view;
+package baseproject.demo.zzq.cn.eeepay.com.baseproject.presenter.interfaces;
 
 import com.uber.autodispose.AutoDisposeConverter;
 
