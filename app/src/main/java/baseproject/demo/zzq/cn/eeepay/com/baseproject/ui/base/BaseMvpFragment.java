@@ -2,6 +2,7 @@ package baseproject.demo.zzq.cn.eeepay.com.baseproject.ui.base;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.arch.lifecycle.Lifecycle;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -19,6 +20,9 @@ import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.trello.rxlifecycle2.components.support.RxFragment;
+import com.uber.autodispose.AutoDispose;
+import com.uber.autodispose.AutoDisposeConverter;
+import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.R;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.presenter.annotated.BasePresenter;
@@ -27,6 +31,8 @@ import baseproject.demo.zzq.cn.eeepay.com.baseproject.presenter.annotated.Presen
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.ui.view.IBaseView;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ToastUtils;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.view.dialog.DialogHelper;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * 描述：抽象的 MvpFragment 基类
@@ -56,6 +62,10 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends RxFragmen
      * 等待加载的对话框
      */
     private ProgressDialog _waitDialog;
+    /**
+     * ------注释说明--butterknife注解框架------
+     **/
+    private Unbinder mUnbinder;
 
     @Override
     public void onAttach(Context context) {
@@ -73,6 +83,7 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends RxFragmen
                 parent.removeView(mRootView);
         } else {
             mRootView = inflater.inflate(getLayoutId(), container, false);
+            mUnbinder = ButterKnife.bind(this, mRootView);
             mActivity = getActivity();
             mContext = mActivity;
             this.inflater = inflater;
@@ -100,6 +111,12 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends RxFragmen
 
     @Override
     public void onDetach() {
+        if (mUnbinder != null)
+            try {
+                mUnbinder.unbind();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         mPresenterDispatch.detachView();
         this.mActivity = null;
         super.onDetach();
@@ -109,6 +126,18 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends RxFragmen
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         mPresenterDispatch.onSaveInstanceState(outState);
+    }
+
+    /**
+     * 绑定生命周期 防止MVP内存泄漏
+     *
+     * @param <T>
+     * @return
+     */
+    @Override
+    public <T> AutoDisposeConverter<T> bindAutoDispose() {
+        return AutoDispose.autoDisposable(AndroidLifecycleScopeProvider
+                .from(this, Lifecycle.Event.ON_DESTROY));
     }
 
     /**

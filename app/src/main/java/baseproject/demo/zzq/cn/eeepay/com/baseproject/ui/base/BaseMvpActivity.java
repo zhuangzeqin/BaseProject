@@ -1,6 +1,7 @@
 package baseproject.demo.zzq.cn.eeepay.com.baseproject.ui.base;
 
 import android.app.ProgressDialog;
+import android.arch.lifecycle.Lifecycle;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -26,6 +27,9 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.orhanobut.logger.Logger;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+import com.uber.autodispose.AutoDispose;
+import com.uber.autodispose.AutoDisposeConverter;
+import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.R;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.presenter.annotated.BasePresenter;
@@ -37,6 +41,8 @@ import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ToastUtils;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.VirturlUtil;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.view.dialog.DialogHelper;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.view.viewbyid.InjectUtils;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import pub.devrel.easypermissions.EasyPermissions;
 
 /**
@@ -47,7 +53,7 @@ import pub.devrel.easypermissions.EasyPermissions;
  * 邮箱：zzq@eeepay.cn
  * 备注:
  */
-public abstract class BaseMvpActivity<P extends BasePresenter> extends RxAppCompatActivity implements IBaseView {
+public abstract class BaseMvpActivity<P extends BasePresenter> extends RxAppCompatActivity implements IBaseView  {
     /***获取TAG的activity名称**/
     protected final String TAG = this.getClass().getSimpleName();
     /***获取Toolbar**/
@@ -70,6 +76,8 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends RxAppComp
     private ProgressDialog mWaitDialog;
     /***上下文对象**/
     protected Context mContext;
+    /** ------注释说明--View注解框架------ **/
+    private Unbinder mUnbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +89,7 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends RxAppComp
         /** ------不可横屏幕-------- **/
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(getContentView());
+        mUnbinder = ButterKnife.bind(this);
         /** ------注释说明--自定义注解；如果不需要可以注释掉------ **/
         InjectUtils.getInstance().inject(this);
         //解决华为虚拟键冲突遮挡底部按钮
@@ -109,11 +118,14 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends RxAppComp
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
+        if (mUnbinder!=null)
+            mUnbinder.unbind();
         //解绑View的操作
         mPresenterDispatch.detachView();
         mPresenterDispatch.onDestroyPresenter();
         ActivityStackManager.getInstance().remove(this);
+        super.onDestroy();
+
     }
 
     /**
@@ -408,6 +420,19 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends RxAppComp
     protected void goTopActivity(@NonNull final String path) {
         goTopActivity(path, null);
     }
+
+    /**
+     * 绑定生命周期 防止MVP内存泄漏
+     *
+     * @param <T>
+     * @return
+     */
+    @Override
+    public <T> AutoDisposeConverter<T> bindAutoDispose() {
+        return AutoDispose.autoDisposable(AndroidLifecycleScopeProvider
+                .from(this, Lifecycle.Event.ON_DESTROY));
+    }
+
 
     /**
      * 布局id

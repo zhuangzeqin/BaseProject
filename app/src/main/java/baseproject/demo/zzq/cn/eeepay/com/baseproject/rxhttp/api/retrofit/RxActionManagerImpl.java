@@ -2,6 +2,8 @@ package baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.retrofit;
 
 import android.support.v4.util.ArrayMap;
 
+import com.orhanobut.logger.Logger;
+
 import io.reactivex.disposables.Disposable;
 
 /**
@@ -51,9 +53,28 @@ public final class RxActionManagerImpl implements IRxActionManager<Object> {
             return;
         }
         if (!mMaps.get(tag).isDisposed()) {
+            Logger.d("解除订阅" + tag);
             mMaps.get(tag).dispose();
         }
         mMaps.remove(tag);
+    }
+
+    /**
+     * ------注释说明-清空所有的请求比如退出应用程序的时候调用一下----
+     **/
+    public void cancelAll() {
+        if (mMaps.isEmpty()) {
+            return;
+        }
+        for (Object key : mMaps.keySet()) {
+            if (mMaps.get(key) == null) {
+                return;
+            }
+            if (!mMaps.get(key).isDisposed()) {
+                mMaps.get(key).dispose();
+            }
+        }
+        mMaps.clear();
     }
 
     /**

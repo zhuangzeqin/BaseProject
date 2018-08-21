@@ -42,7 +42,7 @@ public class TestMVPAct extends BaseMvpActivity<LoginPresenter> implements Login
          getViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener(){
              @Override
              public void onClick(View view) {
-                 getPresenter().login();//调用登录请求
+                 getPresenter().login("13424230742", "123456q");//调用登录请求
              }
          });
      }

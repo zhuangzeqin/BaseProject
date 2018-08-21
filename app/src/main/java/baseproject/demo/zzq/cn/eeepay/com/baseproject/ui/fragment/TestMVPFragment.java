@@ -1,7 +1,9 @@
 package baseproject.demo.zzq.cn.eeepay.com.baseproject.ui.fragment;
 
 import android.support.annotation.UiThread;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 
@@ -14,6 +16,8 @@ import baseproject.demo.zzq.cn.eeepay.com.baseproject.presenter.register.Registe
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.presenter.register.RegisterView;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.ui.base.BaseMvpFragment;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ToastUtils;
+import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * 描述：class describe
@@ -29,10 +33,17 @@ public class TestMVPFragment extends BaseMvpFragment implements LoginView, Regis
     private LoginPresenter mLoginPresenter;
     @PresenterVariable
     private RegisterPresenter mRegisterPresenter;
+    @BindView(R.id.btn_login)
+     Button btn_Login;
+    @BindView(R.id.btn_register)
+     Button btn_Register;
+    int i = 0;
 
     @UiThread
     @Override
     public void loginSuccess(String msg) {
+        i++;
+        Log.i("zhuangzeqin", String.valueOf(i));
         ToastUtils.showLong(msg);
     }
 
@@ -42,13 +53,25 @@ public class TestMVPFragment extends BaseMvpFragment implements LoginView, Regis
         ToastUtils.showLong("注册成功....");
     }
 
+    @OnClick({R.id.btn_login, R.id.btn_register})
+    public void onclickView(View view) {
+        switch (view.getId()) {
+            case R.id.btn_login:
+                mLoginPresenter.login("13424230742", "123456q");//调用登录请求
+                break;
+            case R.id.btn_register:
+                mRegisterPresenter.register();//调用注册请求
+                break;
+        }
+    }
+
     /**
      * 懒加载
      */
     @Override
     protected void lazyLoadData() {
         super.lazyLoadData();
-        mLoginPresenter.login();//调用登录请求
+        mLoginPresenter.login("13424230742", "123456q");//调用登录请求
     }
 
     @Override
@@ -58,18 +81,18 @@ public class TestMVPFragment extends BaseMvpFragment implements LoginView, Regis
 
     @Override
     protected void init() {
-        getViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mLoginPresenter.login();//调用登录请求
-            }
-        });
-
-        getViewById(R.id.btn_register).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mRegisterPresenter.register();//调用注册请求
-            }
-        });
+//        getViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mLoginPresenter.login("13424230742", "123456q");//调用登录请求
+//            }
+//        });
+//
+//        getViewById(R.id.btn_register).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mRegisterPresenter.register();//调用注册请求
+//            }
+//        });
     }
 }

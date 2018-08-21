@@ -3,7 +3,6 @@ package baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.exception;
 /**
  * 描述：api接口错误/异常统一处理类
  * 异常=[程序异常,网络异常,解析异常..]
- * 错误=[接口逻辑错误eg:{code:-101,msg:账号密码错误}]
  * 作者：zhuangzeqin
  * 时间: 2018/8/16-22:39
  * 邮箱：zzq@eeepay.cn

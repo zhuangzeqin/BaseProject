@@ -45,7 +45,7 @@ public class TestMVPAct3 extends BaseMvpActivity implements LoginView, RegisterV
             @Override
             public void onClick(View view) {
                 LoginPresenter mLoginPresenter = getPresenterProviders().getPresenter(0);
-                mLoginPresenter.login();//调用登录请求
+                mLoginPresenter.login("13424230742", "123456q");//调用登录请求
             }
         });
 

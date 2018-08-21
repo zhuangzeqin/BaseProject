@@ -29,7 +29,8 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * 描述：Retrofit 请求封装；采用的是单例模式
+ * 描述：Retrofit封装管理类；采用的是单例模式
+ * 初始化配置相关信息操作
  * 作者：zhuangzeqin
  * 时间: 2018/8/15-18:03
  * 邮箱：zzq@eeepay.cn
@@ -41,7 +42,7 @@ public final class RetrofitManager {
     private static final Gson GSON = new GsonBuilder().registerTypeAdapterFactory(new NullToEmptyAdapterFactory()).create();
     //设置连接超时的值
     private static final int TIMEOUT = 10;
-    //api 服务类
+    //默认的 api 服务类
     private Api api;
     //OkHttpClient 构建类
     private OkHttpClient.Builder builder;
@@ -93,8 +94,11 @@ public final class RetrofitManager {
     public Api getApi() {
         return api;
     }
-    /** ------注释说明--获取不同的服务的api------ **/
-    private <T> T getApiService(final Class<T> service,String baseUrl) {
+
+    /**
+     * ------注释说明--获取不同的服务的api------
+     **/
+    private <T> T getApiService(final Class<T> service, String baseUrl) {
         Retrofit retrofit = new Retrofit.Builder().client(builder.build()).
                 addConverterFactory(GsonConverterFactory.create(GSON))//gson 转换器
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//rxjava 适配器;
@@ -104,29 +108,36 @@ public final class RetrofitManager {
     }
 
     /**
-     * 初始化配置相关信息操作
+     * 如果后期最好都配置在UrlConfig 里统一管理
+     * 初始化默认的配置api相关信息操作
      */
     public void initConfig(@UrlConfig.UrlMode @NonNull final String baseUrl) {
         initCustomConfig(baseUrl);
     }
+
     /**
-     * 自定义初始化配置相关信息操作
+     * 自定义初始化配置不同的baseUrl相关信息操作
      */
     public void initCustomConfig(@NonNull final String baseUrl) {
-        initCustomConfig(Api.class,baseUrl);
+        api = initCustomConfig(Api.class, baseUrl);
     }
+
     /**
-     * 自定义初始化配置不同的服务的api相关信息操作
+     * add zhuangzeqin 二〇一八年八月二十一日 09:35:10 重载函数环环相扣；最后提供一个可以在外围创建不同的api 服务
+     * 这里定义了泛型T 自定义初始化配置不同的服务的api相关信息操作
+     * 如果需要跟某些开发人员调试只需要传不同的api class 即可  例如：initCustomConfig(Api.class, baseUrl);
      */
-    public void initCustomConfig(@NonNull final Class service,@NonNull final String baseUrl) {
+    public <T> T initCustomConfig(@NonNull final Class<T> service, @NonNull final String baseUrl) {
         if (TextUtils.isEmpty(baseUrl))
             throw new IllegalStateException("===baseUrl is null===");
         if (!URLUtil.isNetworkUrl(baseUrl))
             throw new IllegalStateException(baseUrl + "===The baseUrl is Illegal address.===");
         if (builder == null)
             throw new IllegalStateException("===initOkHttpConfig builder is null===");
-        api = getApiService(Api.class,baseUrl);//创建api
+        T apiService = getApiService(service, baseUrl);//创建api
+        return apiService;
     }
+
     /**
      * Log 日志拦截器
      */

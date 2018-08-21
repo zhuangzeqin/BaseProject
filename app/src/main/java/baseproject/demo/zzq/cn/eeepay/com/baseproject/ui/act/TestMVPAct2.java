@@ -65,7 +65,6 @@ public class TestMVPAct2 extends BaseMvpActivity implements LoginView, RegisterV
 
     @Override
     protected void initView() {
-
         initBgBar(R.color.eposp_red_2);
     }
 
@@ -91,10 +90,10 @@ public class TestMVPAct2 extends BaseMvpActivity implements LoginView, RegisterV
 //        });
     }
 
-   /* @OnClickEvent(R.id.btn_login)
-    public void onClickEvent(View view) {
-        mLoginPresenter.login();//调用登录请求
-    }*/
+    /* @OnClickEvent(R.id.btn_login)
+     public void onClickEvent(View view) {
+         mLoginPresenter.login();//调用登录请求
+     }*/
     @OnClickEvent({R.id.btn_login, R.id.btn_register})
     public void onClickEvent(View view) {
         switch (view.getId()) {
@@ -113,7 +112,7 @@ public class TestMVPAct2 extends BaseMvpActivity implements LoginView, RegisterV
                         return false;
                     }
                 });
-                mLoginPresenter.login();//调用登录请求
+                mLoginPresenter.login("13424230742", "123456q");//调用登录请求
                 break;
             case R.id.btn_register:
                 mRegisterPresenter.register();//调用注册请求
@@ -122,8 +121,7 @@ public class TestMVPAct2 extends BaseMvpActivity implements LoginView, RegisterV
     }
 
     @OnLongClickEvent(R.id.btn_tes)
-    public void onLongClickEvent(View view)
-    {
+    public void onLongClickEvent(View view) {
         ToastUtils.showShort("测试一一下长按事件");
     }
 
@@ -149,6 +147,7 @@ public class TestMVPAct2 extends BaseMvpActivity implements LoginView, RegisterV
             ToastUtils.showShort("用户授权成功aaaa");
         }
     }
+
 
     @UiThread
     @Override

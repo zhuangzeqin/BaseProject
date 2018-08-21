@@ -1,10 +1,15 @@
 package baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.rxhelper;
 
 
+import org.reactivestreams.Publisher;
+
+import io.reactivex.Flowable;
+import io.reactivex.FlowableTransformer;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -15,6 +20,23 @@ import io.reactivex.schedulers.Schedulers;
  * 备注:
  */
 public final class RxSchedulersHelper {
+    /**
+     * 统一线程处理
+     *
+     * @param <T> 指定的泛型类型
+     * @return FlowableTransformer
+     */
+    public static <T> FlowableTransformer<T, T> Flo_io_main() {
+        return new FlowableTransformer<T, T>() {
+            @Override
+            public Publisher<T> apply(@NonNull Flowable<T> upstream) {
+                return upstream.subscribeOn(Schedulers.io()).
+                        unsubscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread());
+            }
+        };
+    }
+
     /**
      * ------注释说明---Rxjava2.x  的写法-----
      **/

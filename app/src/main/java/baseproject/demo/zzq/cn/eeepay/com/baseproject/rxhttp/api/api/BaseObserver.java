@@ -1,22 +1,15 @@
 package baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.api;
 
-import android.accounts.NetworkErrorException;
 import android.text.TextUtils;
 
-import com.google.gson.JsonParseException;
 import com.orhanobut.logger.Logger;
 
-import org.json.JSONException;
-
-import java.net.ConnectException;
-import java.net.SocketTimeoutException;
-import java.net.UnknownHostException;
-
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.app.App;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.exception.ApiException;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.retrofit.RxActionManagerImpl;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.NetworkUtil;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import retrofit2.HttpException;
 
 /**
  * 描述：抽象的订阅者Subscriber
@@ -26,11 +19,19 @@ import retrofit2.HttpException;
  * 备注:Result<T>固定的后台数据格式
  */
 public abstract class BaseObserver<T> implements Observer<Result<T>> {//Result<T>固定的后台数据格式
-    private String mErrorMsg = "";//错误信息
-    private Disposable disposable;
+    private String mTag;//请求标识
+
+    public BaseObserver() {
+        //默认以时间戳为请求标识
+        this.mTag = String.valueOf(System.currentTimeMillis());
+    }
+
+    public BaseObserver(String tag) {
+        this.mTag = tag;
+    }
+
     @Override
     public void onSubscribe(Disposable d) {
-        disposable = d;
         //上层调用时只关心成功和失败即可无需关心网络情况
         if (!NetworkUtil.isNetworkAvailable(App.getApplicationInstance().getApplicationContext())) {
             Logger.d("当前网络不可用，请检查网络情况");
@@ -38,6 +39,10 @@ public abstract class BaseObserver<T> implements Observer<Result<T>> {//Result<T
             // 一定好主动调用下面这一句,取消本次Subscriber订阅
             if (!d.isDisposed())
                 d.dispose();
+            return;
+        }
+        if (!TextUtils.isEmpty(mTag)) {
+            RxActionManagerImpl.getInstance().add(mTag, d);
         }
     }
 
@@ -74,8 +79,17 @@ public abstract class BaseObserver<T> implements Observer<Result<T>> {//Result<T
 
     @Override
     public void onError(Throwable e) {
+        RxActionManagerImpl.getInstance().remove(mTag);
         Logger.d(e.getMessage());
-        if (e instanceof ConnectException) {
+        if (e instanceof ApiException) {
+            ApiException exception = (ApiException) e;
+            int code = exception.getCode();//错误码
+            String msg = exception.getMsg();//错误信息
+            onFailure("code:" + code + ":" + msg);
+        } else {
+            onFailure("未知错误");
+        }
+       /* if (e instanceof ConnectException) {
             // 服务器异常
             mErrorMsg = "连接失败";
         } else if (e instanceof NetworkErrorException) {
@@ -94,17 +108,33 @@ public abstract class BaseObserver<T> implements Observer<Result<T>> {//Result<T
             mErrorMsg = "网络错误,数据加载失败";
         } else {
             mErrorMsg = "请求失败，请稍后重试.";
-        }
-        onFailure(mErrorMsg);
+        }*/
+//        onFailure(mErrorMsg);
     }
 
     @Override
     public void onComplete() {
         //解除订阅的地方调用 disposable.dispose()
-        if (disposable!=null && !disposable.isDisposed()) {
-            Logger.d("解除订阅");
-            disposable.dispose();
+        cancel();
+    }
+
+    /**
+     * 手动取消请求
+     */
+    public void cancel() {
+        if (!TextUtils.isEmpty(mTag)) {
+            RxActionManagerImpl.getInstance().cancel(mTag);
         }
+    }
+
+    /**
+     * 是否已经处理
+     */
+    public boolean isDisposed() {
+        if (TextUtils.isEmpty(mTag)) {
+            return true;
+        }
+        return RxActionManagerImpl.getInstance().isDisposed(mTag);
     }
 
     /**

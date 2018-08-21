@@ -4,6 +4,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.api.ApiUtils;
+
 /**
  * 描述：通用的presenter来为我们添加view的绑定与销毁。
  * 作者：zhuangzeqin
@@ -12,6 +17,7 @@ import android.support.annotation.Nullable;
  * 备注:
  */
 public class BasePresenter<V> {
+    protected Map<String, Object> mParams = new HashMap<>();
     /**
      * 上下文Contenxt
      **/
@@ -23,6 +29,10 @@ public class BasePresenter<V> {
 
     protected void onCleared() {
 
+    }
+
+    public BasePresenter() {
+        this.mParams = ApiUtils.getPubParams();//公共参数的请求
     }
 
     /**

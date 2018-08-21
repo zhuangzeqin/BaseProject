@@ -4,6 +4,7 @@ import java.util.Map;
 
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.bean.LoginInfo;
 import io.reactivex.Observable;
+import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -24,10 +25,16 @@ public interface Api {
 
     @FormUrlEncoded
     @POST("personalCenter/receive/{uuid}/")//  @Path：用于URL上占位符
-    Observable<ResultCallBack> reqLonin(@Path("uuid") String uuid,@FieldMap Map<String, Object> request); @FormUrlEncoded
+    Observable<Result<LoginInfo.DataBean>> reqLonin(@Path("uuid") String uuid,@FieldMap Map<String, Object> request);
 
+    @FormUrlEncoded
     @POST("personalCenter/receive/{uuid}/")//  @Path：用于URL上占位符
-    Observable<Result<LoginInfo.DataBean>> reqLonin2(@Path("uuid") String uuid, @FieldMap Map<String, Object> request);
+    Observable<Result<LoginInfo.DataBean>> reqLonin(@Path("uuid") String uuid,
+                                                    @Field("mobile_username") String username,
+                                                    @Field("mobile_password") String password);
+    @FormUrlEncoded
+    @POST("personalCenter/receive/{uuid}/")//  @Path：用于URL上占位符
+    Observable<Result<LoginInfo.DataBean>> reqLonin(@Path("uuid") String uuid);
     /**
      * 一般通用的 GET请求
      *
