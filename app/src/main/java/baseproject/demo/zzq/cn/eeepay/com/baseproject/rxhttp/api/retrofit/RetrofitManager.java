@@ -102,7 +102,7 @@ public final class RetrofitManager {
         Retrofit retrofit = new Retrofit.Builder().client(builder.build()).
                 addConverterFactory(GsonConverterFactory.create(GSON))//gson 转换器
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//rxjava 适配器;
-                .baseUrl(baseUrl)//设置baseurl
+                .baseUrl(baseUrl)//设置baseurl，服务器地址，基础请求路径，最好以"/"结尾
                 .build();
         return retrofit.create(service);
     }

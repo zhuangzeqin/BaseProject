@@ -48,6 +48,9 @@ public abstract class BaseObserver<T> implements Observer<Result<T>> {//Result<T
 
     @Override
     public void onNext(Result<T> t) {//Result<T>固定的后台数据格式
+        if (!TextUtils.isEmpty(mTag)) {
+            RxActionManagerImpl.getInstance().remove(mTag);
+        }
 //        // response = "{\"status\":200,\"msg\":\"失败\",\"data\":[{\"cardNo\":\"100000000000091\",\"accNo\":\"6225768749734024\",\"accName\":\"卢紫俊\",\"bankName\":\"招商银行\",\"accNoT\":\"4024\"}]}";
         if (t != null) {
             //非200的情况
@@ -115,7 +118,6 @@ public abstract class BaseObserver<T> implements Observer<Result<T>> {//Result<T
     @Override
     public void onComplete() {
         //解除订阅的地方调用 disposable.dispose()
-        cancel();
     }
 
     /**

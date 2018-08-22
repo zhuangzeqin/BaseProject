@@ -74,7 +74,13 @@ public final class RxActionManagerImpl implements IRxActionManager<Object> {
                 mMaps.get(key).dispose();
             }
         }
-        mMaps.clear();
+        removeAll();
+    }
+
+    public void removeAll() {
+        if (!mMaps.isEmpty()) {
+            mMaps.clear();
+        }
     }
 
     /**
