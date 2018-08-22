@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.util.ApiUtils;
@@ -17,7 +16,7 @@ import baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.util.ApiUtils;
  * 备注:
  */
 public class BasePresenter<V> {
-    protected Map<String, Object> mParams = new HashMap<>();
+    protected Map<String, Object> mParams;
     /**
      * 上下文Contenxt
      **/
