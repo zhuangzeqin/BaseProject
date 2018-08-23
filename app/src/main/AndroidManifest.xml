@@ -41,7 +41,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".mvp.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -49,23 +49,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.act.ErrorActivity"
+            android:name=".mvp.ui.act.ErrorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.act.ConstraintLayoutActivity"
+            android:name=".mvp.ui.act.ConstraintLayoutActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.act.RxBusAct"
+            android:name=".mvp.ui.act.RxBusAct"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.act.AnnotatedAct" />
+        <activity android:name=".mvp.ui.act.AnnotatedAct" />
         <!-- <activity android:name=".ui.base.BaseMvpActivity" /> -->
-        <activity android:name=".ui.act.TestMVPAct" />
-        <activity android:name=".ui.act.TestMVPAct2" />
-        <activity android:name=".ui.act.TestMVPAct3" />
-        <activity android:name=".ui.act.RxJavaActivity"></activity>
+        <activity android:name=".mvp.ui.act.TestMVPAct" />
+        <activity android:name=".mvp.ui.act.TestMVPAct2" />
+        <activity android:name=".mvp.ui.act.TestMVPAct3" />
+        <activity android:name=".mvp.ui.act.RxJavaActivity"></activity>
     </application>
 
 </manifest>

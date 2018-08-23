@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <baseproject.demo.zzq.cn.eeepay.com.baseproject.view.CommonLinerRecyclerView
+            <baseproject.demo.zzq.cn.eeepay.com.baseproject.view.recyclerview.CommonLinerRecyclerView
                 android:id="@+id/rv_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

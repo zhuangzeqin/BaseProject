@@ -3,6 +3,8 @@ package baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.api;
 import java.util.Map;
 
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.bean.LoginInfo;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.bean.Result;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.bean.ResultCallBack;
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
@@ -25,7 +27,7 @@ public interface Api {
 
     @FormUrlEncoded
     @POST("personalCenter/receive/{uuid}/")//  @Path：用于URL上占位符
-    Observable<Result<LoginInfo.DataBean>> reqLonin(@Path("uuid") String uuid,@FieldMap Map<String, Object> request);
+    Observable<Result<LoginInfo.DataBean>> reqLonin(@Path("uuid") String uuid, @FieldMap Map<String, Object> request);
 
     @FormUrlEncoded
     @POST("personalCenter/receive/{uuid}/")//  @Path：用于URL上占位符

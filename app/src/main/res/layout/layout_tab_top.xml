@@ -25,7 +25,7 @@
             android:singleLine="true" />
     </LinearLayout>
 
-    <baseproject.demo.zzq.cn.eeepay.com.baseproject._tab.MsgView xmlns:mv="http://schemas.android.com/apk/res-auto"
+    <baseproject.demo.zzq.cn.eeepay.com.baseproject.view._tab.MsgView xmlns:mv="http://schemas.android.com/apk/res-auto"
         android:id="@+id/rtv_msg_tip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

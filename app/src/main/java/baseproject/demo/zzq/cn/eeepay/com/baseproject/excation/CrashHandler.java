@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.BuildConfig;
-import baseproject.demo.zzq.cn.eeepay.com.baseproject.ui.act.ErrorActivity;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.ui.act.ErrorActivity;
 
 /**
  * 描述：在发生未能捕获的异常之后，保存LOG到文件，然后 调用前面定义的接口，对日志文件进行处理
