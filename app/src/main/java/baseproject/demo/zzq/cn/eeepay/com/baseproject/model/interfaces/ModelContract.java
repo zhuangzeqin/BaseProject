@@ -20,19 +20,16 @@ public interface ModelContract {
     interface ILoginModel {
         Observable<Result<LoginInfo.DataBean>> reqLonin(@NonNull String uuid, @NonNull Map<String, Object> request);
     }
-
     //登录model 接口
     interface ILoginModel2<T> {
         void reqLonin(@NonNull String uuid, @NonNull Map<String, Object> request, @NonNull IResultCallBack<T> resultCallBack);
     }
-
     //注册相关的Model 接口
     interface IRegisterModel<T> {
         Observable<Result<LoginInfo.DataBean>> reqRegister(@NonNull String username, @NonNull String password, @NonNull IResultCallBack<T> resultCallBack);
     }
-
     /**
-     * 将结果返回给外部调用者使用
+     * 定义CallBack将结果返回给外部调用者使用
      **/
     interface IResultCallBack<T> {
         /**
