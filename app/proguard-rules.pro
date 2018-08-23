@@ -82,6 +82,17 @@
 -keepclasseswithmembernames class * {
     @butterknife.* <methods>;
 }
+# ButterKnife
+-keep public class * implements butterknife.Unbinder {
+    public <init>(**, android.view.View);
+}
+-keep class butterknife.*
+-keepclasseswithmembernames class * {
+    @butterknife.* <methods>;
+}
+-keepclasseswithmembernames class * {
+    @butterknife.* <fields>;
+}
 ################com.lovedise:permissiongen 权限检测################
 -keepclassmembers class ** {
     @kr.co.namee.permissiongen.PermissionSuccess <methods>;
@@ -257,3 +268,37 @@
 -keep interface * implements com.alibaba.android.arouter.facade.template.IProvider
 # 如果使用了 单类注入，即不定义接口实现 IProvider，需添加下面规则，保护实现
 -keep class * implements com.alibaba.android.arouter.facade.template.IProvider
+# Retrolambda
+-dontwarn java.lang.invoke.*
+
+# OkHttp3
+-dontwarn com.squareup.okhttp3.**
+-keep class com.squareup.okhttp3.** { *;}
+-dontwarn okio.**
+
+# Okio
+-dontwarn com.squareup.**
+-dontwarn okio.**
+-keep public class org.codehaus.* { *; }
+-keep public class java.nio.* { *; }
+
+# Retrofit
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
+-keepattributes Signature
+-keepattributes Exceptions
+
+# RxJava RxAndroid
+-dontwarn sun.misc.**
+-keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
+    long producerIndex;
+    long consumerIndex;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
+    rx.internal.util.atomic.LinkedQueueNode producerNode;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
+    rx.internal.util.atomic.LinkedQueueNode consumerNode;
+}
+#API接口不混淆
+-keep class baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.**{*;}
