@@ -24,7 +24,6 @@ import baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.rxhelper.RxSche
  * 备注:
  */
 public final class LoginModel extends BaseModel implements ModelContract.ILoginModel2<LoginInfo.DataBean> {
-    private final static String TAG = LoginModel.class.getSimpleName();//tag 请求标识
     private String mTag;//设置请求的tag
     private AutoDisposeConverter<Result<LoginInfo.DataBean>> mDisposeConverter;//自动销毁的转换器
 

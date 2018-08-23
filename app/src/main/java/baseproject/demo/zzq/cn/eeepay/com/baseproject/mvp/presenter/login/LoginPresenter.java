@@ -47,8 +47,5 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                 mView.showError("登录失败:" + message);
             }
         });
-
-
-
     }
 }
