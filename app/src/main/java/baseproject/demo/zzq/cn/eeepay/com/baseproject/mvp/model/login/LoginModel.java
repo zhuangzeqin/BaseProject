@@ -69,7 +69,9 @@ public final class LoginModel extends BaseModel implements ModelContract.ILoginM
     @Override
     public void reqLonin(@NonNull String uuid, @NonNull Map<String, Object> request, @NonNull final ModelContract.IResultCallBack<LoginInfo.DataBean> resultCallBack) {
         if (mDisposeConverter == null)
-            throw new IllegalStateException("===DisposeConverter is null===");
+            throw new IllegalStateException("=== DisposeConverter is null===");
+        if (resultCallBack == null)
+            throw new IllegalStateException("=== resultCallBack is null===");
         getApi().reqLonin(uuid, request).
                 compose(RxSchedulersHelper.<Result<LoginInfo.DataBean>>io_main()).
                 onErrorResumeNext(new RxHttpErrorFunctionHelper<Result<LoginInfo.DataBean>>())
