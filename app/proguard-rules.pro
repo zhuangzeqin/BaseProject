@@ -302,3 +302,7 @@
 }
 #API接口不混淆
 -keep class baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.**{*;}
+
+# zxing
+-keep class com.google.zxing.** {*;}
+-dontwarn com.google.zxing.**
