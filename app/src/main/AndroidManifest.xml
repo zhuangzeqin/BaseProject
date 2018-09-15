@@ -14,6 +14,8 @@
     <!-- 读写权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- 是否开机启动权限 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:name=".app.App"
@@ -23,7 +25,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/TranslucentTheme">
-
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
         <!--
             从Android 7.0开始，不再允许在app中把file:// Uri暴露给其他app，否则应用会抛出FileUriExposedException
             exported 是否设置为独立进程
@@ -65,7 +69,14 @@
         <activity android:name=".mvp.ui.act.TestMVPAct" />
         <activity android:name=".mvp.ui.act.TestMVPAct2" />
         <activity android:name=".mvp.ui.act.TestMVPAct3" />
-        <activity android:name=".mvp.ui.act.RxJavaActivity"></activity>
+        <activity android:name=".mvp.ui.act.RxJavaActivity" />
+        <activity android:name=".mvp.ui.act.JobSchedulerActivity" />
+
+        <service
+            android:name=".service.MyJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <activity android:name=".mvp.ui.act.StickyScrollViewActivity"></activity>
     </application>
 
 </manifest>

@@ -75,7 +75,7 @@ public abstract class BaseObserver<T> implements Observer<Result<T>> {//Result<T
                     onSucess(t.data);//返回数据
             }
         } else {
-            onFailure("暂时无法获取数据；请稍后重试");
+            onFailure(mTag + ":暂时无法获取数据；请稍后重试");
         }
     }
 

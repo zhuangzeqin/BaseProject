@@ -20,6 +20,7 @@ import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.Md5;
  */
 public class LoginPresenter extends BasePresenter<LoginView> {
     private final static String TAG = LoginPresenter.class.getSimpleName();
+
     /**
      * ------注释说明--登录------ 13424230742 or 123456q
      **/
@@ -32,6 +33,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
         mParams.put("mobile_password", Md5.encode(mobile_password));
         mParams.put("parentMer", "Y");//myInfo 接口新增请求参数 parentMer ,值为Y时,表示需要查询引路人信息,引路人的响应数据在 parMerInfo 参数中.
         mParams.put("getMerCapas", "Y");//add by zhuangzeqin 二〇一八年七月三日 10:48:00 myInfo 接口新增请求参数 新增getMerCapas参数,传Y,则会查询身份级别信息
+//        AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(mContext))
         LoginModel.with(TAG).//设置请求的tag
                 setAutoDisposeConverter(mView.<Result<LoginInfo.DataBean>>bindAutoDispose())
                 .build().reqLonin(Utils.getUUID(), mParams, new ModelContract.IResultCallBack<LoginInfo.DataBean>() {

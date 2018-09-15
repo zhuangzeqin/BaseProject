@@ -71,6 +71,8 @@ public class SimpleFragment extends BaseFragment {
         items.add("Android注解使用");
         items.add("MVP使用");
         items.add("RxJava基础使用");
+        items.add("JobScheduler基础使用");
+        items.add("StickyScrollViewActivity");
 
     }
 
@@ -151,6 +153,12 @@ public class SimpleFragment extends BaseFragment {
                         break;
                     case 8:
                         ARouter.getInstance().build("/RxJava/RxJavaActivity").navigation();
+                        break;
+                    case 9:
+                        ARouter.getInstance().build("/job/JobSchedulerActivity").navigation();
+                        break;
+                    case 10:
+                        ARouter.getInstance().build("/activity/StickyScrollViewActivity").navigation();
                         break;
                 }
             }

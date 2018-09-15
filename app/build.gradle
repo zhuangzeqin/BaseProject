@@ -146,6 +146,7 @@ dependencies {
     //butterknife
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation 'se.emilsjolander:StickyScrollViewItems:1.1.0'
 //    //添加AutoDispose解决RxJava内存泄漏
 //    api 'com.uber.autodispose:autodispose:0.6.1'
 //    api 'com.uber.autodispose:autodispose-android-archcomponents:0.6.1'

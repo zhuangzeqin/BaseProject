@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.emilsjolander.components.StickyScrollViewItems.StickyScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sticky_scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="@android:color/darker_gray"
+            android:gravity="center"
+            android:text="这里是一个Banner" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:tag="sticky">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@android:color/black"
+                android:gravity="center"
+                android:tag="sticky-nonconstant-hastransparancy"
+                android:text="筛选---分类---"
+                android:textColor="@android:color/white" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@android:color/holo_purple"
+                android:gravity="center"
+                android:text="本月---支出799---收入899"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="blocksDescendants">
+       <!-- <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            app:srlAccentColor="@color/gray_text_color_3"
+            app:srlEnablePreviewInEditMode="true"
+            app:srlPrimaryColor="@color/white">-->
+
+          <!--  <com.donkingliang.groupedadapter.widget.StickyHeaderLayout
+                android:id="@+id/sticky_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">-->
+
+                <baseproject.demo.zzq.cn.eeepay.com.baseproject.view.recyclerview.CommonLinerRecyclerView
+                    android:id="@+id/rv_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#fff" />
+           <!-- </com.donkingliang.groupedadapter.widget.StickyHeaderLayout>-->
+       <!-- </com.scwang.smartrefresh.layout.SmartRefreshLayout>-->
+        </RelativeLayout>
+    </LinearLayout>
+</com.emilsjolander.components.StickyScrollViewItems.StickyScrollView>
