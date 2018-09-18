@@ -8,6 +8,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.R;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.presenter.base.CreatePresenter;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.presenter.login.LoginPresenter;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.presenter.login.LoginPresenter2;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.presenter.login.LoginView;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.ui.base.BaseMvpActivity;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ToastUtils;
@@ -19,7 +20,7 @@ import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ToastUtils;
    * 备注:
    */
 @Route(path = "/mvp/TestMVPAct")
-@CreatePresenter(presenter = LoginPresenter.class)
+@CreatePresenter(presenter = LoginPresenter2.class)
 public class TestMVPAct extends BaseMvpActivity<LoginPresenter> implements LoginView {
 
     @Override

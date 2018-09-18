@@ -7,7 +7,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.R;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.presenter.base.CreatePresenter;
-import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.presenter.login.LoginPresenter;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.presenter.login.LoginPresenter2;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.presenter.login.LoginView;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.presenter.register.RegisterPresenter;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.presenter.register.RegisterView;
@@ -22,7 +22,7 @@ import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ToastUtils;
  * 备注:
  */
 @Route(path = "/mvp/TestMVPAct3")
-@CreatePresenter(presenter = {LoginPresenter.class, RegisterPresenter.class})
+@CreatePresenter(presenter = {LoginPresenter2.class, RegisterPresenter.class})
 public class TestMVPAct3 extends BaseMvpActivity implements LoginView, RegisterView {
     @Override
     protected int getContentView() {
@@ -44,7 +44,7 @@ public class TestMVPAct3 extends BaseMvpActivity implements LoginView, RegisterV
         getViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LoginPresenter mLoginPresenter = getPresenterProviders().getPresenter(0);
+                LoginPresenter2 mLoginPresenter = getPresenterProviders().getPresenter(0);
                 mLoginPresenter.login("13424230742", "123456q");//调用登录请求
             }
         });

@@ -23,16 +23,14 @@ import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.Md5;
  * 邮箱：zzq@eeepay.cn
  * 备注:
  */
-public final class LoginModel extends BaseModel implements ModelContract.ILoginModel2<LoginInfo.DataBean> {
+public final class LoginModel2 extends BaseModel implements ModelContract.ILoginModel2<LoginInfo.DataBean> {
     private String mTag;//设置请求的tag
     private IBaseView mView;//自动销毁的转换器;//自动销毁的转换器
-
-    private LoginModel(Builder builder) {
+    private LoginModel2(Builder builder) {
         if (builder == null) return;
         this.mTag = builder.tag;
         this.mView = builder.view;
     }
-
     /**
      * 获取Builder 实例
      *
@@ -41,7 +39,6 @@ public final class LoginModel extends BaseModel implements ModelContract.ILoginM
     public static Builder with(@NonNull IBaseView view) {
         return new Builder(view);
     }
-
     public static class Builder {
         private String tag;//设置请求的tag
         private IBaseView view;//自动销毁的转换器
@@ -62,17 +59,17 @@ public final class LoginModel extends BaseModel implements ModelContract.ILoginM
          *
          * @return
          */
-        public LoginModel build() {
-            return new LoginModel(this);
+        public LoginModel2 build() {
+            return new LoginModel2(this);
         }
     }
-
     @Override
     public void reqLonin(@NonNull String mobile_username, @NonNull String mobile_password, @NonNull final ModelContract.IResultCallBack<LoginInfo.DataBean> resultCallBack) {
         if (mView == null)
             throw new IllegalStateException("=== reqLonin mView is null===");
         if (resultCallBack == null)
             throw new IllegalStateException("=== resultCallBack is null===");
+        /** ------注释说明-参数的封装------- **/
         mParams.put("apiTag", ApiUtil.MERLOGIN_NAME);
         mParams.put("mobile_username", mobile_username);
         mParams.put("mobile_password", Md5.encode(mobile_password));
@@ -81,14 +78,15 @@ public final class LoginModel extends BaseModel implements ModelContract.ILoginM
         getApi().reqLonin(Utils.getUUID(),mParams).
                 compose(RxSchedulersHelper.<Result<LoginInfo.DataBean>>io_main()).
                 onErrorResumeNext(new RxHttpErrorFunctionHelper<Result<LoginInfo.DataBean>>()).
-                as(mView.<Result<LoginInfo.DataBean>>bindAutoDispose()).subscribe(new BaseObserver<LoginInfo.DataBean>(this.mTag) {
+                as(mView.<Result<LoginInfo.DataBean>>bindAutoDispose()).//自动销毁的转换器
+                subscribe(new BaseObserver<LoginInfo.DataBean>(this.mTag) {//订阅需要传tag
             @Override
-            public void onSucess(String tag, LoginInfo.DataBean response) {
-                resultCallBack.onSucess(tag,response);
+            public void onSucess(String tag,LoginInfo.DataBean response) {
+                resultCallBack.onSucess(tag,response);//m层将数据 回到给P层
             }
 
             @Override
-            public void onFailure(String tag, String message) {
+            public void onFailure(String tag,String message) {
                 resultCallBack.onFailure(tag,message);
             }
         });

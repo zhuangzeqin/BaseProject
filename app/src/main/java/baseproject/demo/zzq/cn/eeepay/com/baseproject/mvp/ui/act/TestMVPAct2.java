@@ -18,6 +18,7 @@ import baseproject.demo.zzq.cn.eeepay.com.baseproject.R;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.presenter.base.CreatePresenter;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.presenter.base.PresenterVariable;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.presenter.login.LoginPresenter;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.presenter.login.LoginPresenter2;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.presenter.login.LoginView;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.presenter.register.RegisterPresenter;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.presenter.register.RegisterView;
@@ -37,10 +38,12 @@ import pub.devrel.easypermissions.EasyPermissions;
  * 备注:
  */
 @Route(path = "/mvp/TestMVPAct2")
-@CreatePresenter(presenter = {LoginPresenter.class, RegisterPresenter.class})
+@CreatePresenter(presenter = {LoginPresenter.class, RegisterPresenter.class,LoginPresenter2.class})
 public class TestMVPAct2 extends BaseMvpActivity implements LoginView, RegisterView, EasyPermissions.PermissionCallbacks {
     @PresenterVariable//采用注解无需new
     private LoginPresenter mLoginPresenter;
+    @PresenterVariable//采用注解无需new
+    private LoginPresenter2 mLoginPresenter2;
     @PresenterVariable
     private RegisterPresenter mRegisterPresenter;
 
@@ -112,7 +115,8 @@ public class TestMVPAct2 extends BaseMvpActivity implements LoginView, RegisterV
                         return false;
                     }
                 });
-                mLoginPresenter.login("13424230742", "123456q");//调用登录请求
+//                mLoginPresenter.login("13424230742", "123456q");//调用登录请求
+                mLoginPresenter2.login("13424230742", "123456q");//调用登录请求
                 break;
             case R.id.btn_register:
                 mRegisterPresenter.register();//调用注册请求

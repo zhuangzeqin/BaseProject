@@ -9,7 +9,7 @@ import com.uber.autodispose.AutoDisposeConverter;
  * 时间: 2017/3/20-16:39
  * 邮箱：zzq@eeepay.cn
  */
-public interface IBaseView {
+public interface IBaseView{
     /**
      * 显示loading界面
      **/

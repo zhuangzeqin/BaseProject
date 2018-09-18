@@ -23,7 +23,7 @@ public interface ModelContract {
     }
     //登录model 接口
     interface ILoginModel2<T> {
-        void reqLonin(@NonNull String uuid, @NonNull Map<String, Object> request, @NonNull IResultCallBack<T> resultCallBack);
+        void reqLonin(@NonNull String mobile_username, @NonNull String mobile_password, @NonNull final IResultCallBack<T> resultCallBack);
     }
     //注册相关的Model 接口
     interface IRegisterModel<T> {
@@ -36,11 +36,11 @@ public interface ModelContract {
         /**
          * 成功将结果回调出去
          **/
-        void onSucess(T response);
+        void onSucess(String tag,T response);
 
         /**
          * 失败时将结错误信息回调出去
          **/
-        void onFailure(String message);
+        void onFailure(String tag,String message);
     }
 }

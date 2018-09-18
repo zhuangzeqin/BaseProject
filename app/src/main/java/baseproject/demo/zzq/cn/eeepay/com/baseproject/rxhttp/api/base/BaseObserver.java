@@ -22,13 +22,11 @@ import io.reactivex.disposables.Disposable;
 public abstract class BaseObserver<T> implements Observer<Result<T>> {//Result<T>固定的后台数据格式
     private String mTag;//请求标识
 
-    public BaseObserver() {
-        //默认以时间戳为请求标识
-        this(String.valueOf(System.currentTimeMillis()));
-    }
-
     public BaseObserver(String tag) {
-        this.mTag = tag;
+        if (TextUtils.isEmpty(tag))
+            this.mTag = String.valueOf(System.currentTimeMillis()); //默认以时间戳为请求标识
+        else
+            this.mTag = tag;
     }
 
     @Override
@@ -36,7 +34,7 @@ public abstract class BaseObserver<T> implements Observer<Result<T>> {//Result<T
         //上层调用时只关心成功和失败即可无需关心网络情况
         if (!NetworkUtil.isNetworkAvailable(App.getApplicationInstance().getApplicationContext())) {
             Logger.d("当前网络不可用，请检查网络情况");
-            onFailure("当前网络不可用，请检查网络情况");
+            onFailure(mTag, "当前网络不可用，请检查网络情况");
             // 最好主动调用下面这一句,取消本次Subscriber订阅
             if (!d.isDisposed())
                 d.dispose();
@@ -56,7 +54,7 @@ public abstract class BaseObserver<T> implements Observer<Result<T>> {//Result<T
             if (!t.isSuccess()) {
                 String message = t.msg;
                 if (!TextUtils.isEmpty(message)) {//不为空的；提示错误信息
-                    onFailure(message);
+                    onFailure(mTag, message);
                     return;
                 }
             } else if (t.isSuccess() && t.data == null) { //200的情况 并且 data 为null
@@ -65,17 +63,17 @@ public abstract class BaseObserver<T> implements Observer<Result<T>> {//Result<T
                 if (!TextUtils.isEmpty(message)) {//不为空的；提示错误信息
                     if (t.data.getClass() == String.class)//T 为String 的情况
                     {
-                        onSucess((T) message);
+                        onSucess(mTag, (T) message);
                         return;
                     }
-                    onFailure(message);// 如果T 为对象的
+                    onFailure(mTag, message);// 如果T 为对象的
                 }
             } else {
                 if (t.isSuccess())//成功
-                    onSucess(t.data);//返回数据
+                    onSucess(mTag, t.data);//返回数据
             }
         } else {
-            onFailure(mTag + ":暂时无法获取数据；请稍后重试");
+            onFailure(mTag, "暂时无法获取数据；请稍后重试");
         }
     }
 
@@ -87,9 +85,9 @@ public abstract class BaseObserver<T> implements Observer<Result<T>> {//Result<T
             ApiException exception = (ApiException) e;
             int code = exception.getCode();//错误码
             String msg = exception.getMsg();//错误信息
-            onFailure("code:" + code + ":" + msg);
+            onFailure(mTag, "code:" + code + ":" + msg);
         } else {
-            onFailure("未知错误");
+            onFailure(mTag, "未知错误");
         }
        /* if (e instanceof ConnectException) {
             // 服务器异常
@@ -142,10 +140,10 @@ public abstract class BaseObserver<T> implements Observer<Result<T>> {//Result<T
     /**
      * 成功将结果回调出去
      **/
-    public abstract void onSucess(T response);
+    public abstract void onSucess(String tag, T response);
 
     /**
      * 失败时将结错误信息回调出去
      **/
-    public abstract void onFailure(String message);
+    public abstract void onFailure(String tag, String message);
 }
