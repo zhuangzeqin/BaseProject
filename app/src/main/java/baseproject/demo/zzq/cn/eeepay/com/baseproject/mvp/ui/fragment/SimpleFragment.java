@@ -1,6 +1,7 @@
 package baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.ui.fragment;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -33,6 +34,7 @@ import baseproject.demo.zzq.cn.eeepay.com.baseproject.adapter.SingleAdapter;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.bean.Persons;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.constant.StrDefConstant;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.ui.base.BaseFragment;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ConfigManager;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ToastUtils;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.view.recyclerview.CommonLinerRecyclerView;
 import pub.devrel.easypermissions.AppSettingsDialog;
@@ -73,6 +75,7 @@ public class SimpleFragment extends BaseFragment {
         items.add("RxJava基础使用");
         items.add("JobScheduler基础使用");
         items.add("StickyScrollViewActivity");
+        items.add("读取properties资源文件");
 
     }
 
@@ -106,6 +109,7 @@ public class SimpleFragment extends BaseFragment {
         refreshLayout.setNoMoreData(true);
         mSingleAdapter.setOnlyOnce(false);
         mSingleAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @SuppressLint("WrongConstant")
             @Override
             public void onItemClick(View itemView, int viewType, int position) {
                 switch (position) {
@@ -159,6 +163,10 @@ public class SimpleFragment extends BaseFragment {
                         break;
                     case 10:
                         ARouter.getInstance().build("/activity/StickyScrollViewActivity").navigation();
+                        break;
+                    case 11:
+                        String host_address = ConfigManager.getInstance().getConfigValue("HOST_ADDRESS");
+                        ToastUtils.showShort(host_address);
                         break;
                 }
             }
