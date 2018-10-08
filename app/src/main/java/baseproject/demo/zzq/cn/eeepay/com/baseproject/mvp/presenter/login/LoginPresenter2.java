@@ -6,6 +6,7 @@ import baseproject.demo.zzq.cn.eeepay.com.baseproject.bean.LoginInfo;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.model.interfaces.ModelContract;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.model.login.LoginModel2;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.presenter.base.BasePresenter;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.presenter.interfaces.PresenterContract;
 
 /**
  * 描述 P层处理界面想要的数据；返回给V层，解耦
@@ -14,17 +15,19 @@ import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.presenter.base.BasePre
  * 邮箱：zzq@eeepay.cn
  * 备注:
  */
-public class LoginPresenter2 extends BasePresenter<LoginView> {
+public class LoginPresenter2 extends BasePresenter<LoginView> implements PresenterContract.loginPresenter{
     private final static String TAG = LoginPresenter2.class.getSimpleName();
-
     /**
-     * ------注释说明--登录------ 13424230742 or 123456q
-     **/
-    public void login(@NonNull String mobile_username, @NonNull String mobile_password) {
+     * 登录请求  13424230742 or 123456q
+     * @param username
+     * @param password
+     */
+    @Override
+    public void login(@NonNull String username, @NonNull String password) {
         //View是否绑定 如果没有绑定，就不执行网络请求
-        if (!isAttachView()) return;
+        if (!isAttachView())return;
         mView.showLoading();
-        LoginModel2.with(mView).setTag(TAG).build().reqLonin(mobile_username, mobile_password,
+        LoginModel2.with(mView).setTag(TAG).build().reqLonin(username, password,
                 new ModelContract.IResultCallBack<LoginInfo.DataBean>() {
                     @Override
                     public void onSucess(String tag, LoginInfo.DataBean response) {
@@ -39,4 +42,27 @@ public class LoginPresenter2 extends BasePresenter<LoginView> {
                     }
                 });
     }
+
+//    /**
+//     * ------注释说明--登录------ 13424230742 or 123456q
+//     **/
+//    public void login(@NonNull String mobile_username, @NonNull String mobile_password) {
+//        //View是否绑定 如果没有绑定，就不执行网络请求
+//        if (!isAttachView()) return;
+//        mView.showLoading();
+//        LoginModel2.with(mView).setTag(TAG).build().reqLonin(mobile_username, mobile_password,
+//                new ModelContract.IResultCallBack<LoginInfo.DataBean>() {
+//                    @Override
+//                    public void onSucess(String tag, LoginInfo.DataBean response) {
+//                        mView.hideLoading();
+//                        mView.loginSuccess(response.toString());
+//                    }
+//
+//                    @Override
+//                    public void onFailure(String tag, String message) {
+//                        mView.hideLoading();
+//                        mView.showError(tag + "登录失败:" + message);
+//                    }
+//                });
+//    }
 }

@@ -1,5 +1,6 @@
 package baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.ui.act;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.UiThread;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -42,6 +43,7 @@ public class TestMVPAct extends BaseMvpActivity<LoginPresenter> implements Login
 
      }
 
+     @SuppressLint("CheckResult")
      @Override
      protected void eventOnClick() {
          RxView.clicks(getViewById(R.id.btn_login))
@@ -53,13 +55,16 @@ public class TestMVPAct extends BaseMvpActivity<LoginPresenter> implements Login
                          getPresenter().login("13424230742", "123456q");//调用登录请求
                      }
                  });
-         
-//         getViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener(){
-//             @Override
-//             public void onClick(View view) {
-//               
-//             }
-//         });
+
+         RxView.clicks(getViewById(R.id.btn_login))
+                 .throttleFirst(500, TimeUnit.SECONDS)
+                 .subscribe(new Consumer<Object>() {
+                     @Override
+                     public void accept(Object o) throws Exception {
+                         // do something
+                         getPresenter().login("13424230742", "123456q");//调用登录请求
+                     }
+                 });
      }
 
      @Override

@@ -60,8 +60,10 @@ public class TestMVPFragment extends BaseMvpFragment implements LoginView, Regis
     public void onclickView(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
-//                mLoginPresenter.login("13424230742", "123456q");//调用登录请求
+                //所有子View
                 mLoginPresenter2.login("13424230742", "123456q");//调用登录请求
+//                mLoginPresenter.login("13424230742", "123456q");//调用登录请求
+
                 break;
             case R.id.btn_register:
                 mRegisterPresenter.register();//调用注册请求

@@ -37,6 +37,7 @@ import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.ui.base.BaseFragment;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ConfigManager;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ToastUtils;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.view.recyclerview.CommonLinerRecyclerView;
+import cn.imkarl.waitview.WaitViewController;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -86,11 +87,13 @@ public class SimpleFragment extends BaseFragment {
 
     @Override
     public void initView() {
+
         refreshLayout = getViewById(R.id.refreshLayout);
         commonLinerRecyclerView = getViewById(R.id.rv_list);
         mSingleAdapter = new SingleAdapter(mContext, items, R.layout.listitem);
         mSingleAdapter.setData(items);
         commonLinerRecyclerView.setAdapter(mSingleAdapter);
+
     }
 
     @Override
@@ -99,11 +102,13 @@ public class SimpleFragment extends BaseFragment {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
                 refreshLayout.finishLoadMore(500);
+
             }
 
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
                 refreshLayout.finishRefresh(500);
+
             }
         });
         refreshLayout.setNoMoreData(true);

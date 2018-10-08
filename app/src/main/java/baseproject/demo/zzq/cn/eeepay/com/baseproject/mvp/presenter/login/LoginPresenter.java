@@ -6,6 +6,7 @@ import baseproject.demo.zzq.cn.eeepay.com.baseproject.bean.LoginInfo;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.model.interfaces.ModelContract;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.model.login.LoginModel;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.presenter.base.BasePresenter;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.presenter.interfaces.PresenterContract;
 
 /**
  * 描述 P层处理界面想要的数据；返回给V层，解耦
@@ -14,7 +15,7 @@ import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.presenter.base.BasePre
  * 邮箱：zzq@eeepay.cn
  * 备注:
  */
-public class LoginPresenter extends BasePresenter<LoginView> {
+public class LoginPresenter extends BasePresenter<LoginView> implements PresenterContract.loginPresenter {
     private final static String TAG = LoginPresenter.class.getSimpleName();
 
     /**
@@ -27,17 +28,17 @@ public class LoginPresenter extends BasePresenter<LoginView> {
 //        AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(mContext))
         LoginModel.with(mView).setTag(TAG).build().
                 reqLonin(mobile_username, mobile_password, new ModelContract.IResultCallBack<LoginInfo.DataBean>() {
-            @Override
-            public void onSucess(String tag, LoginInfo.DataBean response) {
-                mView.hideLoading();
-                mView.loginSuccess(response.toString());
-            }
+                    @Override
+                    public void onSucess(String tag, LoginInfo.DataBean response) {
+                        mView.hideLoading();
+                        mView.loginSuccess(response.toString());
+                    }
 
-            @Override
-            public void onFailure(String tag, String message) {
-                mView.hideLoading();
-                mView.showError(message);
-            }
-        });
+                    @Override
+                    public void onFailure(String tag, String message) {
+                        mView.hideLoading();
+                        mView.showError(message);
+                    }
+                });
     }
 }
