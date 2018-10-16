@@ -28,4 +28,9 @@
         <item name="android:textColorPrimary">@color/progress_color</item>
         <item name="android:background">@color/progress_color</item>
     </style>
+
+    <declare-styleable name="BlinkLayout">
+        <attr name="blink_color" format="color|reference"/>
+        <attr name="blink_animation_duration" format="integer|reference"/>
+    </declare-styleable>
 </resources>

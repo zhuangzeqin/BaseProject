@@ -10,6 +10,7 @@
     <include layout="@layout/layout_toolbar" />
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/clroot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="baseproject.demo.zzq.cn.eeepay.com.baseproject.ui.act.TestMVPAct">

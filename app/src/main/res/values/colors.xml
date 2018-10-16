@@ -29,4 +29,6 @@
     <!--超级兑项目中黄色按钮色值-->
     <color name="btn_color_nor">@color/app_main_color</color>
     <color name="btn_color_pre">@color/app_main_color</color>
+    <color name="blink_color">#b1b1b1</color>
+    <color name="shimmer_color">#a2878787</color>
 </resources>
