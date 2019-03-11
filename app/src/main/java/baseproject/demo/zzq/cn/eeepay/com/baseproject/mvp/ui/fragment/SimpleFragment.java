@@ -37,7 +37,6 @@ import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.ui.base.BaseFragment;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ConfigManager;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.ToastUtils;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.view.recyclerview.CommonLinerRecyclerView;
-import cn.imkarl.waitview.WaitViewController;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -77,6 +76,9 @@ public class SimpleFragment extends BaseFragment {
         items.add("JobScheduler基础使用");
         items.add("StickyScrollViewActivity");
         items.add("读取properties资源文件");
+        items.add("使用shape绘制阴影图层阴影效果");
+        items.add("CoordinatorLayout");
+        items.add("SpiderMan收集奔溃的错误日志");
 
     }
 
@@ -172,6 +174,22 @@ public class SimpleFragment extends BaseFragment {
                     case 11:
                         String host_address = ConfigManager.getInstance().getConfigValue("HOST_ADDRESS");
                         ToastUtils.showShort(host_address);
+                        break;
+                    case 12:
+                        ARouter.getInstance().build("/RxJava/ShapeActivity").navigation();
+                        break;
+                    case 13:
+                        ARouter.getInstance().build("/RxJava/CoordinatorLayoutActivity").navigation();
+                        break;
+                    case 14:
+//                        SpiderMan能为您做的事：
+//                        在Android手机上显示闪退崩溃信息，直接分享给相关开发人员!
+//                            再也不用担心测试妹妹给你重现怎么操作崩溃的啦！
+//                        再也不用担心产品相关人员给你说哪儿哪儿崩溃，但是又重现不了的尴尬啦！
+//                        再也不用担心某些Rom禁止异常输出啦！
+//                        再也不用担心开发工具log信息时灵时不灵啦！
+                        String string = null;
+                        string.split("-");
                         break;
                 }
             }

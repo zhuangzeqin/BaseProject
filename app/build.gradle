@@ -160,5 +160,7 @@ dependencies {
     //显示等待加载状态的View
     implementation 'com.github.ImKarl:WaitView:1.1'
 //    api 'com.lxj:statelayout:0.0.9'
+    //奔溃日志的收集
+    implementation 'com.simple:spiderman:1.1.0'
 
 }

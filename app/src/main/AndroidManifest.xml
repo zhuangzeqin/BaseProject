@@ -76,7 +76,9 @@
             android:name=".service.MyJobService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
-        <activity android:name=".mvp.ui.act.StickyScrollViewActivity"></activity>
+        <activity android:name=".mvp.ui.act.StickyScrollViewActivity" />
+        <activity android:name=".mvp.ui.act.ShapeActivity" />
+        <activity android:name=".mvp.ui.act.CoordinatorLayoutActivity"></activity>
     </application>
 
 </manifest>

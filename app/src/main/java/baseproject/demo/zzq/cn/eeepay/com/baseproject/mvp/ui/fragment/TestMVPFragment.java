@@ -30,7 +30,10 @@ import butterknife.OnClick;
  * 备注:
  */
 @Route(path = "/mvp/TestMVPFragment")
-@CreatePresenter(presenter = {LoginPresenter.class, RegisterPresenter.class, LoginPresenter2.class})
+@CreatePresenter(presenter = {
+        LoginPresenter.class,
+        RegisterPresenter.class,
+        LoginPresenter2.class})
 public class TestMVPFragment extends BaseMvpFragment implements LoginView, RegisterView {
     @PresenterVariable//采用注解无需new
     private LoginPresenter mLoginPresenter;

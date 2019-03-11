@@ -20,11 +20,13 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.simple.spiderman.SpiderMan;
 
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.BuildConfig;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.R;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.excation.CrashHandlerManager;
-import baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.util.ApiUtils;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.retrofit.RetrofitManager;
+import baseproject.demo.zzq.cn.eeepay.com.baseproject.rxhttp.api.util.ApiUtils;
 import baseproject.demo.zzq.cn.eeepay.com.baseproject.utils.Utils;
 
 /**
@@ -45,6 +47,10 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        //放在其他库初始化前
+//        SpiderMan.init(this);
+        SpiderMan.init(this)
+                .setTheme(R.style.SpiderManTheme_Dark);
         initARouter();
         mInstance = this;
         /**  初始化异常处理 **/

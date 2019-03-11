@@ -36,6 +36,11 @@ public abstract class BaseFragment extends Fragment implements BaseViewInfterfac
     }
 
     @Override
+    public void onAttachFragment(Fragment childFragment) {
+        super.onAttachFragment(childFragment);
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBundle = getArguments();//参数Bunlder

@@ -11,4 +11,6 @@ import baseproject.demo.zzq.cn.eeepay.com.baseproject.mvp.presenter.interfaces.I
  */
 public interface RegisterView extends IBaseView{
     void registerSuccess();//注册成功
+
+    //............................
 }
